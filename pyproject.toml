@@ -1,0 +1,15 @@
+[project]
+name = "systems-biology-project-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "pypesto[cma]>=0.5.6",
+    "python-dateutil",
+    "scipy",
+    "sund>=2.3.0",
+]

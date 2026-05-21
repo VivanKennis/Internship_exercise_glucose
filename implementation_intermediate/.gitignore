@@ -1,0 +1,8 @@
+.vscode/
+.venv/
+figures/
+results/
+__pycache__/
+*/__pycache__/
+
+.python-version

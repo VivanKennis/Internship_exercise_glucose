@@ -1,0 +1,74 @@
+########## NAME
+M_parker_backup
+
+########## METADATA
+time_unit = m
+description = """
+
+This model describes the glucose and insulin dynamics during excercise
+Plamsa insulin (I),
+Remote Insulin (X),
+Plasma glucose (G),
+
+
+"""
+
+########## MACROS
+########## STATES
+d/dt(I)     = -n*I + p4*u1 - Ie # mU/ml
+d/dt(X)     = -p2*X + p3*(I - Ib)  # mU/ml
+d/dt(G)     = -p1*(G - Gb) - X*G + (BW/VolG)*(Gprod - Ggly) - (BW/VolG)*Gup + u2/VolG # mg/dl
+d/dt(Gprod) = a1*PVo2max - a2*Gprod    # hepatic glucose production induced by exercise (mg/kg/min)
+d/dt(Gup)   = a3*PVo2max - a4*Gup      # glucose uptake induced by excercise (mg/kg/min)
+d/dt(Ie)    = a5*PVo2max - a6*Ie       # rate of insulin removal (μU/ml/min)
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3  # 
+d/dt(Ggly) = 0                       # TODO: glycolyse dynamics (simplified for now)
+d/dt(A)    = u3                       # integrated exercise intensity (simplified)
+
+I(0)     = Ib
+X(0)     = 0.0
+G(0)     = Gb
+Gprod(0) = 0.0
+Gup(0)   = 0.0
+Ie(0)    = 0.0
+PVo2max(0) = 0.0
+Ggly(0) = 0.0
+A(0)    = 0.0
+
+########## PARAMETERS
+n   =  0.142       # clearance rate plasma insuline (min^-1)
+p1  = 0.035        # glucose removal rate from plasma space (independent of insulin) (min^-1)
+p2  = 0.05         # disappearance rate remote insulin from remote insulin compartment (min^-1)
+p3  = 0.000028     # appearance rate insulin in remote insulin compartment (ml/μU*min^2)
+p4  =  0.098       # (ml^-1)
+Gb  =  80.0        # basal plasma glucose (mg/dl)
+VolG =  117.0      # glucose distribution space (dl)
+a1  = 0.00158      # (mg*kg*min^2) 
+a2  = 0.056        # (min^-1)
+a3  = 0.00195      # (mg*kg*min^2)          
+a4  = 0.0485       # (min^-1)
+a5  = 0.00125      # (μU*ml^-1*min)
+a6  = 0.075        #  (min^-1)
+k   = 0.0108       #  rate of glycolyses decline (mg*kg^-1*min^2)
+T1  = 6.0          #  time required o return to basel glycolyses value (min)
+ 
+########## VARIABLES
+tgly = -1.1521*u3 + 87.471          # maximal duration of excercise at intensity u3 (min)
+ATH  = -1.1521*u3^2 + 87.471*u3    # critical threshold value at which glycolyses start to decrease during excercise (%-min) 
+
+########## FUNCTIONS
+########## EVENTS
+
+########## OUTPUTS
+########## INPUTS
+u3 = intensity  @ 0         # exercise intensity
+Ib = Ib         @ 29.9      # basal insulin level (mU/ml)
+BW = BW         @ 84        # body weight (kg)
+#Vo2max = Vo2max @ 40        # percentage of maximal oxygen consumption
+
+u1 = u1         @ 0         # insulin infused exogenously
+u2 = u2         @ 0         # dietary absorption or external infusion of glucose 
+
+########## FEATURES
+Glucose_mmolL = G
+Insulin_mlUL = I

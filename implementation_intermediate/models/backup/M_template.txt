@@ -1,0 +1,46 @@
+
+########## NAME
+M2
+########## METADATA
+time_unit = m
+description = """This is a template mode to showcase the code functionality"""
+
+########## MACROS
+########## STATES
+d/dt(R)  = r2-r1
+d/dt(Rp) = r1-r2
+d/dt(S)  = r4-r5
+d/dt(Sp) = r5-r4
+d/dt(A)  = - r3
+
+R(0)  = 1.0
+Rp(0) = 0.0
+S(0)  = 1.0
+Sp(0) = 0.0
+A(0)  = 0.0
+
+########## PARAMETERS
+k1    = 0.1323989301252191
+k2    = 1.2908286686598165
+kfeed = 0.36039181214424615
+k4    = 127428.30985685946
+k5    = 300698.5488721224
+
+########## VARIABLES
+r1 = R*A*k1
+r2 = Rp*k2
+r3 = A*Sp*kfeed
+r4 = Sp*k4
+r5 = S*Rp*k5
+
+########## FUNCTIONS
+########## EVENTS
+event1 = gt(A_in, 0), A, A_in
+
+########## OUTPUTS
+########## INPUTS
+A_in = A_in @ 0  # this is an input named A_in with a default value of 0 if no activity is provided
+
+########## FEATURES
+yRp = Rp  [fraction phosphorylation]
+ySp = Sp  [fraction phosphorylation]
