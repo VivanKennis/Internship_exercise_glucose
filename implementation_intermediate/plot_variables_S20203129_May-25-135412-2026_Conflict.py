@@ -19,7 +19,7 @@ from functions.utils import load_best_parameters
 
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_NAME = "M_epinephrine9"
+MODEL_NAME = "M_epinephrine7"
 MODEL_FILE = BASE_DIR / "models" / f"{MODEL_NAME}.txt"
 DATA_FILE = BASE_DIR / "data" / "data_epinephrine.json"
 RESULTS_DIR = BASE_DIR / "results" / MODEL_NAME
@@ -45,8 +45,7 @@ MODEL_VARIABLES = [
 	"EPI",
 	"NOR",
 	"stress",
-	"lactate",
-	"accum"
+	"lactate"
 ]
 
 DATA_ALIASES = {
@@ -72,8 +71,7 @@ DISPLAY_LABELS = {
 	"EPI": "Epinephrine",
 	"NOR": "Norepinephrine",
 	"stress": "Stress",
-	"lactate": "Lactate",
-	"accum": "Accum"
+	"lactate": "Lactate"
 }
 
 

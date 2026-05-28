@@ -16,7 +16,7 @@ new PVO2max equation
 ########## MACROS
 ########## STATES
 #d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                    # dimensionless 
-d/dt(PVo2max) = ((Vmax * u3)/(Km + u3)) - Kel * PVo2max                                 # percentage of maximal oxygen consumption (dimensionless)
+d/dt(PVo2max) = ((Vmax * u3)/(Km + u3)) - Kel * PVo2max                                   # percentage of maximal oxygen consumption (dimensionless)
 
 d/dt(EPI)    = a7*stress - a8* (EPI-Eb)                                                        # Epinephrine (nmol/L/min)
 d/dt(NOR)    = a9*stress - a10*(NOR - Nb)                                                       # Norepinephrine (nmol/L/min)

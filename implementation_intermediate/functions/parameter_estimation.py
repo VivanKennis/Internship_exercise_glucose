@@ -41,13 +41,12 @@ def get_parameter_indices_to_optimize(parameter_names, fixed_parameters = []):
 
 def get_parameter_bounds(parameter_names, theta, optimize_indices):
     # Set up main parameter bounds
-    lb = [np.log(1.0e-5)]*(len(theta))
-    ub = [np.log(1.0e5)] * (len(theta))
+    lb = [np.log(1.0e-3)]*(len(theta))
+    ub = [np.log(1.0e3)] * (len(theta))
 
     # Parameter-specific bounds
     param_bounds = {}
-    param_bounds["ns"] = (0.1, 4) 
-    # param_bounds["k2"] = (np.log(1e-2), np.log(1e2)) # Example of setting specific bounds for parameter "k2"
+    param_bounds["n_stress"] = (np.log(2e-1), np.log(4e0)) # Example of setting specific bounds for parameter "n_stress"
 
     # Apply parameter-specific bounds
     for param, (lower, upper) in param_bounds.items():
@@ -61,7 +60,6 @@ def get_parameter_bounds(parameter_names, theta, optimize_indices):
     # Convert to numpy arrays and return bounds object
     bounds = Bounds(np.asarray(lb), np.asarray(ub))  # type: ignore[arg-type]
     return bounds
-
 
 def save_result(cost, p_full, filename):
     try:

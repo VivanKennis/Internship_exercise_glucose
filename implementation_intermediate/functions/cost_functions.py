@@ -6,6 +6,11 @@ from functions.utils import reconstruct_parameter_vector
 
 def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
     cost = 0
+    peak_penalty_weight = 20.0
+    peak_experiment = "Kreisman 87%"
+    peak_observable = "Norepinephrine_nmolL"
+    peak_index = 5
+
     # k_exp = experiment name, d = dictionary with data for that experiment
     for k_exp, d in data.items():
         try:    # probeer de simulatie uit te voeren, als er een fout optreed dan door naar "except"
@@ -29,8 +34,12 @@ def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
                 y_sim = y_sim[np.searchsorted(sim.time_vector, obs["Time"])]
                 cost += np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
 
+                if k_exp == peak_experiment and k_obs == peak_observable and len(obs["Mean"]) > peak_index:
+                    peak_residual = (obs["Mean"][peak_index] - y_sim[peak_index]) / obs["SEM"][peak_index]
+                    cost += peak_penalty_weight * np.square(peak_residual)
+
                 if print_costs:
-                    c = np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
+                    c = cost#np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
                     print(f"{k_exp}-{k_obs}: {c}")
 
         # als er een fout optreed dan een hoge cost geven
@@ -41,6 +50,52 @@ def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
             return cost
 
     return cost
+
+
+
+
+def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
+    cost = 0
+    peak_penalty_weight = 20.0
+    peak_experiment = "Kreisman 87%"
+    peak_observable = "Norepinephrine_nmolL"
+    peak_index = 5
+    
+    for k_exp, d in data.items():
+        try:    
+            sim = sims[k_exp]
+            ic = sim.state_values
+            sim.reset_states()  
+            
+            if simulate_steady_state:
+                simulate_model_steady_state(sim, ic, p)
+                ic = sim.state_values
+
+            simulate_model(sim, ic, p, time_vector=data[k_exp]["all_times"])
+
+            for k_obs, obs in d["Observables"].items():
+                idx = sim.feature_names.index(k_obs)
+                y_sim = sim.feature_data[:, idx]
+
+                y_sim = y_sim[np.searchsorted(sim.time_vector, obs["Time"])]
+                cost += np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
+
+                if k_exp == peak_experiment and k_obs == peak_observable and len(obs["Mean"]) > peak_index:
+                    peak_residual = (obs["Mean"][peak_index] - y_sim[peak_index]) / obs["SEM"][peak_index]
+                    cost += peak_penalty_weight * np.square(peak_residual)
+
+                if print_costs:
+                    c = cost#np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
+                    print(f"{k_exp}-{k_obs}: {c}")
+
+        except Exception as e:
+            if "CVODE" not in str(e):
+                print(f"Error in {k_exp}: {e}")
+            cost += 1e20
+            return cost
+
+    return cost
+
 
 
 def f_cost_log_with_fixed_parameters(p_log, sims, data, simulate_steady_state = False, 

@@ -30,7 +30,7 @@ d/dt(Ie)    = a5*PVo2max - a6*Ie                                                
 d/dt(PVo2max) = ((Vmax * u3)/(Km + u3)) - Kel * PVo2max                                 # percentage of maximal oxygen consumption (dimentionless)
 
 #d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                  # dimentionless 
-d/dt(Ggly) = gly_A*k*A_u3 - Ggly/T1*B_u3                                                # glycolyse dynamics (simplified for now) (mmol/kg/min)
+d/dt(Ggly) = gly_A*k*A_u3 - Ggly/T1*B_u3                                                # glycolyse dynamics (mmol/kg/min)
 d/dt(A)    = A_u3*PVo2max - (A/0.001)*B_u3                                              # integrated exercise intensity 
 
 d/dt(EPI)    = Eb + a7*PVo2max - a8* (EPI-Eb)                                                        # Epinephrine (mU/L/min)

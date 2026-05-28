@@ -1,7 +1,7 @@
-"""Plot PVo2max against exercise intensity.
+"""Plot stress against PVo2max for multiple Vmax_stress values.
 
-This script creates a simple steady-state curve so you can quickly inspect
-how PVo2max changes as intensity increases.
+This script creates steady-state curves so you can quickly inspect how stress
+changes as PVo2max increases while varying Vmax_stress between 10 and 50.
 """
 
 from pathlib import Path
@@ -13,27 +13,42 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def pvo2max_steady_state(intensity: np.ndarray, vmax: float = 80.0, km: float = 80.0, kel: float = 0.8) -> np.ndarray:
-	"""Compute the steady-state PVo2max response for a given intensity."""
-	intensity = np.asarray(intensity, dtype=float)
-	return (vmax / kel) * intensity / (km + intensity)
+def stress_steady_state(
+	pvo2max: np.ndarray,
+	vmax_stress: float = 10.0,
+	km_stress: float = 49.0,
+	n_stress: float = 1.0,
+	elim_stress: float = 0.05,
+) -> np.ndarray:
+	"""Compute steady-state stress for a given PVo2max based on the model hill term."""
+	pvo2max = np.asarray(pvo2max, dtype=float)
+	hill = (vmax_stress * np.power(pvo2max, n_stress)) / (
+		np.power(km_stress, n_stress) + np.power(pvo2max, n_stress)
+	)
+	return hill / elim_stress
 
 
 def main() -> None:
-	intensity = np.linspace(0.0, 100.0, 500)
-	pvo2max = pvo2max_steady_state(intensity)
+	pvo2max = np.linspace(0.0, 100.0, 500)
+	n_values = np.linspace(1.0, 3.0, 4)
 
 	figure_dir = Path(__file__).resolve().parent / "figures"
 	figure_dir.mkdir(exist_ok=True)
-	output_path = figure_dir / "pvo2max_vs_intensity.png"
+	output_path = figure_dir / "stress_vs_pvo2max_n_01_4.png"
 
 	plt.figure(figsize=(7, 4.5))
-	plt.plot(intensity, pvo2max, color="#1f77b4", linewidth=2.5)
-	plt.axvline(80, color="gray", linestyle="--", linewidth=1)
-	plt.text(81, pvo2max_steady_state(np.array([80.0]))[0], "80%", color="gray", va="bottom")
-	plt.xlabel("Intensity (%)")
-	plt.ylabel("PVo2max")
-	plt.title("PVo2max vs Intensity")
+	for n_stress in n_values:
+		stress = stress_steady_state(pvo2max, n_stress=n_stress)
+		plt.plot(
+			pvo2max,
+			stress,
+			linewidth=2.0,
+			label=f"N = {n_stress:.1f}",
+		)
+	plt.xlabel("PVo2max")
+	plt.ylabel("Stress")
+	plt.title("Stress vs PVo2max for varying N")
+	plt.legend(fontsize=8)
 	plt.grid(alpha=0.25)
 	plt.tight_layout()
 	plt.savefig(output_path, dpi=200)

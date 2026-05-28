@@ -18,20 +18,20 @@ from functions.simulation import create_sims_from_data
 from functions.utils import load_best_parameters
 
 # Model and data settings
-MODEL_NAME = "M_epinephrine5" 
+MODEL_NAME = "M_epinephrine10" 
 BASE_DIR = Path(__file__).resolve().parent # Define model and data file paths based on the project root for stable file paths
 DATA_FILE = BASE_DIR / "data" / "data_epinephrine.json" 
 VALIDATION_EXPERIMENTS = {"Kjaer 110% trained"} 
 
 # Analysis flags
-DO_OPTIMIZATION = False     # False: no optimization
+DO_OPTIMIZATION = False       # False: no optimization
 DO_PLOT = True              # True: show figures
 SIMULATE_STEADY_STATE = True   # True: simulation runs from -1000 to 0 before simulation starts to reach steady state
-FIXED_PARAMETERS = []       # List of parameters that are fixed during optimization
+FIXED_PARAMETERS = ["basal_nor", "basal_epi"]       # List of parameters that are fixed during optimization
 
 N_OPTIMIZATIONS = 5         # Number of separate optimization attempts
-MAXITER = 50                # Maximum number of iterations per optimization
-RUN_IN_PARALLEL = False     # Run optimizations in parallel?
+MAXITER = 500                # Maximum number of iterations per optimization
+RUN_IN_PARALLEL = True     # Run optimizations in parallel?
 PRINT_ITERATIONS = False     # Print iterations during optimization?
 PERTURBATION_RATIO = 0.3    # How much to perturb the starting values for a new optimization run
 DIFFERENTIAL_EVOLUTION_RATIO = 0.7  # Probability of choosing each optimizer per run: differential evolution (70%) or dual annealing (30%)

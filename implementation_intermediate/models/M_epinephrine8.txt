@@ -1,5 +1,5 @@
 ########## NAME
-M_epinephrine6
+M_epinephrine8
 
 ########## METADATA
 time_unit = m
@@ -10,17 +10,18 @@ Epinephrine (EPI),
 Norepinephrine (NOR),
 Percentage of maximal oxygen consumption (PVo2max)
 
-old PVO2max equation
-Epi depends on NOR
+lactate added threshold with max
 """
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                             #  percentage of maximal oxygen consumption (dimensionless)
 
-d/dt(EPI)    = prod_epi*(NOR - basal_nor) - elim_epi* (EPI-basal_epi)                                                        # Epinephrine (nmol/L/min)
-d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR - basal_nor)                                                       # Norepinephrine (nmol/L/min)
-d/dt(stress) = ((Vmax_stress *(PVo2max)^n_stress)/(Km_stress^n_stress + PVo2max^n_stress)) - elim_stress*stress + lac_stress * lactate
-d/dt(lactate) = prod_lactate*max(PVo2max-LT1,0) - elim_lactate*lactate
+d/dt(EPI)    = prod_epi*stress - elim_epi* (EPI-Epib)                                                        # Epinephrine (nmol/L/min)
+d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb)                                                       # Norepinephrine (nmol/L/min)
+d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate
+
+d/dt(lactate) = k_exp * (exp(prod_lactate * PVo2max) - 1) - elim_lactate*lactate
+d/dt(lactate) = k_exp * (exp(prod_lactate * max(PVo2max+threshold,0)) - 1) - elim_lactate*lactate
 
 PVo2max(0) = 0.0 # dimensionless
 EPI(0) = 0.3
@@ -30,26 +31,25 @@ lactate(0) = 0
 
 ########## PARAMETERS
 # Epi
-prod_epi = 0.55     
-elim_epi = 133         
-basal_epi = 0.3        
+prod_epi = 0.2     
+elim_epi = 80.0         
 
 # Nor
-prod_nor = 19        
-elim_nor = 490        
-basal_nor = 1.3        
+prod_nor = 0.3        
+elim_nor = 25        
 
 # Stress
-Vmax_stress = 20         
-Km_stress = 1.7            
-n_stress = 1.0
-elim_stress = 0.2   
-lac_stress = 0.14
+Vmax_stress = 10.0         
+Km_stress = 49            
+n_stress = 3.0
+elim_stress = 0.05   
+lac_stress = 3
 
 # Lactate
-prod_lactate = 1750
-elim_lactate = 84
-LT1 = 52
+prod_lactate = 0.06
+elim_lactate = 0.5
+k_exp = 0.3
+threshold = 3.0
 
 ########## VARIABLES
 ########## FUNCTIONS
@@ -59,6 +59,8 @@ LT1 = 52
 u3 = intensity  @ 0          # exercise intensity (%)
 Ib = Ib         @ 12.0       # basal insulin level (mU/L)
 Gb = Gb         @ 4.9750     # basal plasma glucose (mmol/L)
+Epib = Epib         @ 0.3     # basal epinephrine (nmol/)
+Norb = Norb         @ 1.3     # basal norepinephrine (mmol/L)
 BW = BW         @ 84         # body weight (kg)
 #Vo2max = Vo2max @ 40        # percentage of maximal oxygen consumption
 
