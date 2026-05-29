@@ -1,4 +1,4 @@
-# standaard python imports
+# standard python imports
 import os
 import sys
 from multiprocessing import Pool
@@ -18,23 +18,23 @@ from functions.simulation import create_sims_from_data
 from functions.utils import load_best_parameters
 
 # Model and data settings
-MODEL_NAME = "M_epinephrine10" 
-BASE_DIR = Path(__file__).resolve().parent # Define model and data file paths based on the project root for stable file paths
-DATA_FILE = BASE_DIR / "data" / "data_epinephrine.json" 
-VALIDATION_EXPERIMENTS = {"Kjaer 110% trained"} 
+MODEL_NAME             = "M_epinephrine10"
+BASE_DIR               = Path(__file__).resolve().parent              # Define model and data file paths based on the project root for stable file paths
+DATA_FILE              = BASE_DIR / "data" / "data_epinephrine.json"
+VALIDATION_EXPERIMENTS = {"Kjaer 110% trained"}
 
 # Analysis flags
-DO_OPTIMIZATION = False       # False: no optimization
-DO_PLOT = True              # True: show figures
-SIMULATE_STEADY_STATE = True   # True: simulation runs from -1000 to 0 before simulation starts to reach steady state
-FIXED_PARAMETERS = ["basal_nor", "basal_epi"]       # List of parameters that are fixed during optimization
+DO_OPTIMIZATION       = False                       # False: no optimization
+DO_PLOT               = True                        # True: show figures
+SIMULATE_STEADY_STATE = True                        # True: simulation runs from -1000 to 0 before simulation starts to reach steady state
+FIXED_PARAMETERS      = ["basal_nor", "basal_epi"]  # List of parameters that are fixed during optimization
 
-N_OPTIMIZATIONS = 5         # Number of separate optimization attempts
-MAXITER = 500                # Maximum number of iterations per optimization
-RUN_IN_PARALLEL = True     # Run optimizations in parallel?
-PRINT_ITERATIONS = False     # Print iterations during optimization?
-PERTURBATION_RATIO = 0.3    # How much to perturb the starting values for a new optimization run
-DIFFERENTIAL_EVOLUTION_RATIO = 0.7  # Probability of choosing each optimizer per run: differential evolution (70%) or dual annealing (30%)
+N_OPTIMIZATIONS              = 5      # Number of separate optimization attempts
+MAXITER                      = 500    # Maximum number of iterations per optimization
+RUN_IN_PARALLEL              = True   # Run optimizations in parallel?
+PRINT_ITERATIONS             = False  # Print iterations during optimization?
+PERTURBATION_RATIO           = 0.3    # How much to perturb the starting values for a new optimization run
+DIFFERENTIAL_EVOLUTION_RATIO = 0.7    # Probability of choosing each optimizer per run: differential evolution (70%) or dual annealing (30%)
 
 def calculate_costs(model, sims, estimation_data, validation_data, chi2_thresholds={}, print_individual_costs=False):
     # Get best results from the results folder for the model (if saved earlier). This will be used as the starting point for the cost calculation and optimization
@@ -106,14 +106,14 @@ def main(do_plot=True, do_optimization=False):
 
         # create a dictionary of arguments to pass to the optimization function
         args = {
-            "data": estimation_data,
-            "fixed_params": FIXED_PARAMETERS,
-            "model_name": MODEL_NAME,
+            "data"                 : estimation_data,
+            "fixed_params"         : FIXED_PARAMETERS,
+            "model_name"           : MODEL_NAME,
             "simulate_steady_state": SIMULATE_STEADY_STATE,
-            "de_ratio": DIFFERENTIAL_EVOLUTION_RATIO,
-            "max_iter": MAXITER,
-            "perturbation_ratio": PERTURBATION_RATIO,
-            "print_iter": PRINT_ITERATIONS,
+            "de_ratio"             : DIFFERENTIAL_EVOLUTION_RATIO,
+            "max_iter"             : MAXITER,
+            "perturbation_ratio"   : PERTURBATION_RATIO,
+            "print_iter"           : PRINT_ITERATIONS,
         }
 
         if RUN_IN_PARALLEL:
