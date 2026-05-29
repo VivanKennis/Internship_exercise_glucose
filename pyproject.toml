@@ -8,8 +8,7 @@ dependencies = [
     "matplotlib",
     "numpy",
     "pandas",
-    "pypesto[cma]>=0.5.6",
     "python-dateutil",
     "scipy",
-    "sund>=2.3.0",
+    "sund>=2.4.1",
 ]
