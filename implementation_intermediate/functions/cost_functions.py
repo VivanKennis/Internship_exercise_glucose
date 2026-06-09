@@ -6,6 +6,7 @@ from functions.utils import reconstruct_parameter_vector
 
 def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
     cost = 0
+    penalty = False
     peak_penalty_weight = 20.0
     peak_experiment = "Kreisman 87%"
     peak_observable = "Norepinephrine_nmolL"
@@ -34,9 +35,12 @@ def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
                 y_sim = y_sim[np.searchsorted(sim.time_vector, obs["Time"])]
                 cost += np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
 
-                if k_exp == peak_experiment and k_obs == peak_observable and len(obs["Mean"]) > peak_index:
+                if penalty and k_exp == peak_experiment and k_obs == peak_observable and len(obs["Mean"]) > peak_index:
                     peak_residual = (obs["Mean"][peak_index] - y_sim[peak_index]) / obs["SEM"][peak_index]
-                    cost += peak_penalty_weight * np.square(peak_residual)
+                    cost_peak = peak_penalty_weight * np.square(peak_residual)
+                    cost += cost_peak
+                    if print_costs:
+                        print(f"{k_exp}-{k_obs} peak_cost: {cost_peak}")
 
                 if print_costs:
                     c = cost#np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
@@ -82,10 +86,13 @@ def f_cost(p, sims, data, simulate_steady_state = False, print_costs = False):
 
                 if k_exp == peak_experiment and k_obs == peak_observable and len(obs["Mean"]) > peak_index:
                     peak_residual = (obs["Mean"][peak_index] - y_sim[peak_index]) / obs["SEM"][peak_index]
-                    cost += peak_penalty_weight * np.square(peak_residual)
+                    cost_peak = peak_penalty_weight * np.square(peak_residual)
+                    cost += cost_peak
+                    if print_costs:
+                        print(f"{k_exp}-{k_obs} peak_cost: {cost_peak}")
 
                 if print_costs:
-                    c = cost#np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
+                    c = np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
                     print(f"{k_exp}-{k_obs}: {c}")
 
         except Exception as e:

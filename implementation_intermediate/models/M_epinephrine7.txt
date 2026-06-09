@@ -14,12 +14,12 @@ lactate changed with exp ipv max
 """
 ########## MACROS
 ########## STATES
-d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                             #  percentage of maximal oxygen consumption (dimensionless)
-
-d/dt(EPI)    = prod_epi*stress - elim_epi* (EPI-Epib)                                                        # Epinephrine (nmol/L/min)
-d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb)                                                        # Norepinephrine (nmol/L/min)
-d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                                                                           #  percentage of maximal oxygen consumption (dimensionless)
 d/dt(lactate) = k_exp * (exp(prod_lactate * PVo2max) - 1) - elim_lactate*lactate
+d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate
+
+d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb)                                                                                                           # Norepinephrine (nmol/L/min)
+d/dt(EPI)    = prod_epi*stress - elim_epi* (EPI-Epib)                                                                                                           # Epinephrine (nmol/L/min)
 
 PVo2max(0) = 0.0 # dimensionless
 EPI(0) = 0.3

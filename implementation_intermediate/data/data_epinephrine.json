@@ -1,4 +1,102 @@
-{
+{    "Koivisto 40% untrained":{
+        "meta": {
+            "DOI": "10.1016/0026-0495(82)90135-4", 
+            "kl": "-",
+            "meal": 13,
+            "age": 29,
+            "sex": "Male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 15, 195],
+                "f": [0, 40.5, 0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.249],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [1.6843],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [74],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [42.6],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [15],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Epinephrine_nmolL": {
+                "Time": [0, 15, 75, 135, 195],
+                "Mean": [0.249, 0.266, 0.297, 0.768, 1.706],
+                "SEM":  [0.050, 0.199, 0.013, 0.118, 0.436],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 5,
+                    "subplot_idx": 1,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Koivisto 40% untrained",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Epinephrine (nmol/L)",
+                    "ylim": [0, 2],
+                    "xlim": [0, 200]
+                }
+           
+            },
+            "Norepinephrine_nmolL": {
+                "Time": [0, 15, 75, 135, 195],
+                "Mean": [1.6843, 1.6480, 3.3201, 4.1022, 5.3622],
+                "SEM":  [0.35, 0.35, 0.69, 0.64, 0.90],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 6,
+                    "subplot_idx": 1,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Koivisto 40% untrained",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylim": [0, 15],
+                    "xlim": [0, 200]
+                }
+           
+            }
+        }
+    }, 
     "Kreisman 50%": {
         "meta": { 
             "doi": "10.2337/diabetes.52.6.1347",
@@ -42,6 +140,11 @@
                 "t": [-Infinity],
                 "f": [57.1],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [0],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -53,8 +156,8 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 1,
-                    "shape": [3, 3],
+                    "subplot_idx": 2,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -76,8 +179,8 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 1,
-                    "shape": [3, 3],
+                    "subplot_idx": 2,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -136,6 +239,11 @@
                 "t": [-Infinity],
                 "f": [53.8],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [35],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -146,8 +254,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
-                    "subplot_idx": 2,
-                    "shape": [3, 3],
+                    "subplot_idx": 3,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -169,8 +277,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 6,
-                    "subplot_idx": 2,
-                    "shape": [3, 3],
+                    "subplot_idx": 3,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -230,6 +338,11 @@
                 "t": [-Infinity],
                 "f": [44],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [30],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -240,8 +353,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
-                    "subplot_idx": 3,
-                    "shape": [3, 3],
+                    "subplot_idx": 4,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -263,8 +376,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 6,
-                    "subplot_idx": 3,
-                    "shape": [3, 3],
+                    "subplot_idx": 4,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -324,6 +437,11 @@
                 "t": [-Infinity],
                 "f": [41.5],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [0],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -334,8 +452,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
-                    "subplot_idx": 4,
-                    "shape": [3, 3],
+                    "subplot_idx": 5,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -357,8 +475,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 6,
-                    "subplot_idx": 4,
-                    "shape": [3, 3],
+                    "subplot_idx": 5,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -418,6 +536,11 @@
                 "t": [-Infinity],
                 "f": [32.3],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [0],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -428,8 +551,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
-                    "subplot_idx": 5,
-                    "shape": [3, 3],
+                    "subplot_idx": 6,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -451,8 +574,8 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 6,
-                    "subplot_idx": 5,
-                    "shape": [3, 3],
+                    "subplot_idx": 6,
+                    "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
                         [102, 153, 255],
@@ -468,7 +591,82 @@
            
             }
         }
-    },   
+    }, 
+    "Kraemer 100%":{
+        "meta": {
+            "DOI": "10.1073/pnas.82.18.6349", 
+            "kl": "-",
+            "meal": "-",
+            "age": 24.2,
+            "sex": "male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 0, 8, 16, 24, 26],
+                "f": [0, 28, 54, 83, 100, 0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.239],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [2.19],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [66.06],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [42.10],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [0],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Epinephrine_nmolL": {
+                "Time": [0,     8,      16,     24,    26, 31,    46],
+                "Mean": [0.239, 0.278, 0.415, 1.486, 2.525, 0.428, 0.229],
+                "SEM":  [0.185, 0.159, 0.159, 0.598, 1.205, 0.415, 0.124],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 5,
+                    "subplot_idx": 7,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Kraemer 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Epinephrine (nmol/L)",
+                    "ylim": [0, 5],
+                    "xlim": [0, 50]
+                } 
+            }
+        }
+    }, 
     "Kreisman 87%":{
         "meta": {
             "doi": "10.1152/ajpendo.2000.278.5.E786",
@@ -512,6 +710,11 @@
                 "t": [-Infinity],
                 "f": [62.5],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [60],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -523,8 +726,8 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 6,
-                    "shape": [3,3],
+                    "subplot_idx": 8,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],
@@ -546,8 +749,8 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 6,
-                    "shape": [3,3],
+                    "subplot_idx": 8,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],
@@ -606,6 +809,11 @@
                 "t": [-Infinity],
                 "f": [47],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [20],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -617,8 +825,8 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 7,
-                    "shape": [3,3],
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],
@@ -640,8 +848,8 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 7,
-                    "shape": [3,3],
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],
@@ -700,6 +908,11 @@
                 "t": [-Infinity],
                 "f": [65],
                 "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [20],
+                "type" : "constant"
             }
         },
         "Observables": {
@@ -711,8 +924,8 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 8,
-                    "shape": [3,3],
+                    "subplot_idx": 10,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],
@@ -734,8 +947,8 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 8,
-                    "shape": [3,3],
+                    "subplot_idx": 10,
+                    "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
                             [102, 153, 255],

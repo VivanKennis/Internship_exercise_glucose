@@ -8,7 +8,7 @@ from functions.simulation import simulate_model, simulate_model_steady_state
 
 LINE_WIDTH = 2
 FONT_SIZE_TITLE = 10
-FONT_SIZE_AXIS = 8
+FONT_SIZE_AXIS = 6
 FONT_SIZE_LEGEND = 8
 FONT_SIZE_ANNOTATION = 12
 

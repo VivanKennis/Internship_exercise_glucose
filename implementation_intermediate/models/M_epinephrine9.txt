@@ -16,26 +16,23 @@ deleted a
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
-d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb)  #- to epinephrine                                                      # Norepinephrine (nmol/L/min)
-d/dt(EPI)    = (prod_epi- nor_loss)*(NOR- Norb) - elim_epi* (EPI-Epib)   # + to epinephrine                              # Epinephrine (nmol/L/min)
-d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate
 d/dt(lactate) = k_exp * (exp(prod_lactate * PVo2max) - 1) - elim_lactate*lactate
+d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate
+                                                                       
+d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb) - conv_nor*(NOR-Norb)                                 # Norepinephrine (nmol/L/min)
+d/dt(EPI)    = conv_nor*(NOR-Norb) - elim_epi* (EPI-Epib)                                                   # Epinephrine (nmol/L/min)
 
 PVo2max(0) = 0.0 # dimensionless
-EPI(0) = 0.3
-NOR(0) = 1.3
-stress(0) = 0
 lactate(0) = 0
+stress(0) = 0
+NOR(0) = 1.3
+EPI(0) = 0.3
 
 ########## PARAMETERS
-# Epi
-prod_epi = 0.2     
-elim_epi = 80.0
-nor_loss = 15         
-
-# Nor
-prod_nor = 0.3        
-elim_nor = 25        
+# Lactate
+prod_lactate = 0.06
+elim_lactate = 0.5
+k_exp = 0.3
 
 # Stress
 Vmax_stress = 10.0         
@@ -44,10 +41,13 @@ n_stress = 3.0
 elim_stress = 0.05   
 lac_stress = 3
 
-# Lactate
-prod_lactate = 0.06
-elim_lactate = 0.5
-k_exp = 0.3
+# Nor
+prod_nor = 0.3        
+elim_nor = 25        
+
+# Epi
+conv_nor = 0.2     
+elim_epi = 80.0
 
 ########## VARIABLES
 ########## FUNCTIONS

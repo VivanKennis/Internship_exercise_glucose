@@ -1,0 +1,102 @@
+########## NAME
+M_epinephrine13
+
+########## METADATA
+time_unit = m
+description = """
+
+This model describes the Epinephrine and Norepinephrine dynamics during excercise.
+Epinephrine (EPI),
+Norepinephrine (NOR),
+Percentage of maximal oxygen consumption (PVo2max)
+
+epi and nor production changed
+"""
+########## MACROS
+########## STATES
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*intensity                                                                       # Percentage of maximal oxygen consumption (dimensionless)
+#d/dt(lactate) = k_exp * (exp(prod_lactate * PVo2max) - 1) - elim_lactate*lactate + Kpush * max(time-time_ex, 0) * sign(intensity)
+#d/dt(stress) = ((Vmax_stress *(max(PVo2max,0))^n_stress)/(Km_stress^n_stress + (max(PVo2max,0))^n_stress)) - elim_stress*stress + lac_stress * lactate 
+                                                                       
+#d/dt(NOR)    = prod_nor*stress - elim_nor*(NOR- Norb) - conv_nor*(NOR-Norb)                                 # Norepinephrine (nmol/L/min)
+#d/dt(EPI)    = conv_nor*(NOR-Norb) - elim_epi* (EPI-Epib)                                                   # Epinephrine (nmol/L/min)
+
+d/dt(lactate)    = k_lac_prod * max(0, (PVo2max - LT)) - k_lac_elim*lactate
+d/dt(stress) = k_met_lac*lactate + k_met_int*intensity - k_met_elim*stress
+
+# Tissue
+d/dt(NOR_tissue)  = Vmax_NOR*f_mm(stim_nor, km_NOR) - k_NOR_reuptake*NOR_tissue - k_NOR_spill*NOR_tissue
+d/dt(Adrenal_Epi) = Vmax_EPI*f_mm(stim_epi, km_EPI) - k_release_epi*Adrenal_Epi
+
+# Plasma
+d/dt(NOR) = k_NOR_spill*NOR_tissue    - k_elim_nor*NOR                               # Norepinephrine (nmol/L/min)
+d/dt(EPI) = k_release_epi*Adrenal_Epi - k_elim_epi*EPI                               # Epinephrine (nmol/L/min)
+
+PVo2max(0) = 0.0 # dimensionless
+lactate(0) = 0
+stress(0) = 0
+NOR(0) = 1.3
+EPI(0) = 0.3
+NOR_tissue(0)=0
+Adrenal_Epi(0) =0
+
+########## PARAMETERS
+# lactate 
+k_lac_prod = 1
+LT         = 1
+k_lac_elim = 1
+
+# met stress
+k_met_lac  = 1
+k_met_int  = 1
+k_met_elim = 1
+
+# Tissue
+Vmax_NOR       = 1
+km_NOR         = 1
+k_NOR_basal    = 1
+k_exc_nor      = 1
+k_met_nor      = 1
+k_NOR_reuptake = 1
+k_NOR_spill    = 1
+
+Vmax_EPI      = 1
+km_EPI        = 1
+k_EPI_basal   = 1
+k_exc_epi     = 1
+k_met_epi     = 1
+k_release_epi = 1
+
+# Plasma
+k_elim_nor = 1
+k_elim_epi = 1
+
+########## VARIABLES
+stim_nor = k_NOR_basal + k_exc_nor*PVo2max + k_met_nor*stress
+stim_epi = k_EPI_basal + k_exc_epi*PVo2max + k_met_epi*stress
+
+########## FUNCTIONS
+f_hill(x, km, n) = x^n / (km^n + x^n)
+f_mm (x, km) = x / (km + x) 
+
+########## EVENTS
+########## OUTPUTS
+########## INPUTS
+intensity = intensity  @ 0          # exercise intensity (%)
+Ib = Ib         @ 12.0       # basal insulin level (mU/L)
+Gb = Gb         @ 4.9750     # basal plasma glucose (mmol/L)
+Epib = Epib     @ 0.3     # basal epinephrine (nmol/)
+Norb = Norb     @ 1.3     # basal norepinephrine (mmol/L)
+BW = BW         @ 84         # body weight (kg)
+time_ex = time_ex @ 0
+
+#Vo2max = Vo2max @ 40        # percentage of maximal oxygen consumption
+
+########## FEATURES
+PVo2max = PVo2max
+Norepinephrine_nmolL = NOR  
+Epinephrine_nmolL = EPI
+EPI = EPI
+NOR = NOR
+stress = stress
+lactate = lactate
