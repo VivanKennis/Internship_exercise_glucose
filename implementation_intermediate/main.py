@@ -18,7 +18,7 @@ from functions.simulation import create_sims_from_data
 from functions.utils import load_best_parameters
 
 # Model and data settings
-MODEL_NAME             = "M_epinephrine10"
+MODEL_NAME             = "M_epinephrine15"
 BASE_DIR               = Path(__file__).resolve().parent              # Define model and data file paths based on the project root for stable file paths
 DATA_FILE              = BASE_DIR / "data" / "data_epinephrine.json"
 VALIDATION_EXPERIMENTS = {"Kjaer 110% trained"}

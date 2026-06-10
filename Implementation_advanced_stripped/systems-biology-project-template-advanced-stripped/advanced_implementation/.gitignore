@@ -1,0 +1,12 @@
+.vscode/
+.venv/
+figures/
+results/
+results_PI/
+results_reverse_PPL/
+results_PPL/
+results_PL/
+results_MCMC/
+__pycache__/
+*/__pycache__/
+.python-version

@@ -1,0 +1,9 @@
+emcee
+matplotlib
+numpy
+pandas
+pypesto
+python-dateutil
+dfo-ls
+scipy
+sund
