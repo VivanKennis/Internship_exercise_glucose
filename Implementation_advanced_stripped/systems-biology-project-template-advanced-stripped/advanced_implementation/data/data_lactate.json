@@ -1,0 +1,245 @@
+{    "Koivisto 40% untrained":{
+        "meta": {
+            "DOI": "10.1016/0026-0495(82)90135-4", 
+            "kl": "-",
+            "meal": 13,
+            "age": 29,
+            "sex": "Male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 15, 195],
+                "f": [0, 40.5, 0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.249],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [1.6843],
+                "type" : "constant"
+            },
+            "Lacb": { 
+                "t": [-Infinity],
+                "f": [0.98],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [74],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [42.6],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [15],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Lactate_mmolL": {
+                "Time": [0, 15, 75, 135, 195],
+                "Mean": [0.98, 0.87, 0.84, 0.94,1.10],
+                "SEM":  [0.13, 0.12, 0.07, 0.09, 0.09],
+                "unit": "mmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 1,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Koivisto 40% untrained",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 15],
+                    "xlim": [0, 200]
+                }
+           
+            }
+        }
+    }, 
+    "Gaitanos 100%":{
+        "meta": {
+            "DOI": " 10.1152/jappl.1993.75.2.712", 
+            "kl": "-",
+            "meal": 5,
+            "age": 26.7,
+            "sex": "Male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 5,  5.1, 5.6, 5.7, 6.2, 6.3, 6.8, 6.9, 7.4, 7.5, 8.0, 8.1, 8.6, 8.7, 9.2, 9.3, 9.8, 9.9, 10.4, 10.5],
+                "f": [0,        100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100,  0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.38],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [1.82],
+                "type" : "constant"
+            },
+            "Lacb": { 
+                "t": [-Infinity],
+                "f": [0.66],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [71.8],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [0.0],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [20.5],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Lactate_mmolL": {
+                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
+                "Mean": [0.66, 1.87, 9.25, 12.60, 12.09, 12.20, 12.74, 11.66],
+                "SEM":  [0.08, 0.35, 0.54, 0.63,  0.39,  0.36,  0.38, 0.65],
+                "unit": "mmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Gaitanos 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 13],
+                    "xlim": [0, 22]
+                }
+           
+            }
+        }
+    },
+    "Lehmann 100%":{
+        "meta": {
+            "DOI": " 10.1007/BF00423406", 
+            "kl": "-",
+            "meal": "-",
+            "age": 29.3,
+            "sex": "Female"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 0,    3,    6,    9,    12,    15],
+                "f": [0,         51.6, 71.8, 87.2, 95.7, 97.9, 100],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [3.00],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [3.52],
+                "type" : "constant"
+            },
+            "Lacb": { 
+                "t": [-Infinity],
+                "f": [1.00],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [60],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [57.9],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [24],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Lactate_mmolL": {
+                "Time": [0,    3,    6,    9,    12,    13,  15],
+                "Mean": [1.00, 2.54, 3.96, 6.00, 9.70,  10.80, 10.90],
+                "SEM":  [0.11, 1.29, 1.65, 1.71, 2.11,  2.04,  2.65],
+                "unit": "mmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 10,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Lehmann 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 15],
+                    "xlim": [0, 18]
+                }
+           
+            }
+        }
+    }
+}
+         

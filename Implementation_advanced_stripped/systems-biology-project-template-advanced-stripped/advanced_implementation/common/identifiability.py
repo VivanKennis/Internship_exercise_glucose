@@ -7,7 +7,7 @@ import time
 import numpy as np
 
 from common.cost_functions import f_cost
-from advanced_implementation.common.parameter_estimation_functions import (
+from common.parameter_estimation_functions import (
     ROUNDING_PRECISION, cleanup_temp_file, get_parameter_bounds,
     get_parameter_indices_to_optimize, run_directional_optimization,
     save_result, setup_simulations)

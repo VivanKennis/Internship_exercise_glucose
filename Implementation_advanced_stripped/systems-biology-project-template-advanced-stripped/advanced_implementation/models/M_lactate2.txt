@@ -1,0 +1,62 @@
+########## NAME
+M_lactate2
+
+########## METADATA
+time_unit = m
+description = """
+
+This model describes the Epinephrine and Norepinephrine dynamics during excercise.
+Epinephrine (EPI),
+Norepinephrine (NOR),
+Percentage of maximal oxygen consumption (PVo2max)
+
+"""
+########## MACROS
+########## STATES
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
+d/dt(O2) = - v_cons * f_hill(PVo2max, km_O2, n_O2) + k_resore * (O2b-O2)                                    # - consuption + restore
+d/dt(lactate) = vmax*f_hill(max(O2b-O2,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
+
+PVo2max(0) = 0.0    # dimensionless
+lactate(0) = 1.0    # mmol/L
+O2(0)      = 100.0 # %
+
+########## PARAMETERS
+# Lactate
+vmax = 3.7
+km_lac = 10
+n_lac = 3
+elim_lactate = 0.33
+
+# O2
+v_cons = 2
+km_O2 = 50
+n_O2 = 8
+k_resore = 0.1
+
+########## VARIABLES
+
+########## FUNCTIONS
+f_hill(x, km, n) = x^n / (km^n + x^n)
+f_mm (x, km) = x / (km + x) 
+
+########## EVENTS
+event_basal = gt(time, -INFINITY), lactate, Lacb, O2, O2b
+
+########## OUTPUTS
+########## INPUTS
+u3 = intensity  @ 0          # exercise intensity (%)
+Ib = Ib         @ 12.0       # basal insulin level (mU/L)
+Gb = Gb         @ 4.9750     # basal plasma glucose (mmol/L)
+Epib = Epib         @ 0.3     # basal epinephrine (nmol/)
+Norb = Norb         @ 1.3     # basal norepinephrine (nmol/L)
+Lacb = Lacb         @ 1.0     # basal Lactate (mmol/L)
+BW = BW           @ 84         # body weight (kg)
+#Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
+time_ex = time_ex @ 0
+O2b = O2b         @ 100.0
+########## FEATURES
+PVo2max = PVo2max
+Lactate_mmolL = lactate
+lactate = lactate
+O2 = O2

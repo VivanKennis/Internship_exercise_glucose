@@ -11,7 +11,7 @@ When starting a new project, modify the settings in this file to match your need
 
 # Name of the model file (without .txt extension)
 # The model file should be located in the ./models/ directory
-MODEL_NAME: str = "M_epinephrine15"
+MODEL_NAME: str = "M_lactate2"
 
 # Set to True if the model needs to simulate a steady state before running experiments
 SIMULATE_STEADY_STATE: bool = True
@@ -29,7 +29,6 @@ DO_PARAMETER_IDENTIFIABILITY: bool = False
 # Set to True to run reverse prediction profile likelihood analysis
 DO_REVERSE_PPL: bool = False
 
-
 # Set to True to plot results
 DO_PLOT: bool = True
 
@@ -41,14 +40,14 @@ DO_PLOT_ONLY: bool = False
 # ============================================================================
 
 # Path to the data file
-DATA_FILE: str = "./data/data_epinephrine.json"
+DATA_FILE: str = "./data/data_lactate.json"
 
 # Set to True to print degrees of freedom during data loading
 PRINT_DOF: bool = False
 
 # Define which experiments are used for validation (not optimization)
 # Example: {"Experiment3", "Experiment4"}
-VALIDATION_EXPERIMENTS: set = {"Kjaer 110% trained"}
+VALIDATION_EXPERIMENTS: set = {"Kjaer 110% trained", "Gaitanos 100%"}
 
 # Significance level for chi-square thresholds
 CHI2_SIGNIFICANCE_LEVEL: float = 0.05
@@ -66,7 +65,7 @@ PRINT_ITERATIONS: bool = True
 # List of parameter names that should be fixed during optimization
 # These parameters will not be changed during the optimization process
 # Example: ["k1", "k2", "kfeed"]
-FIXED_PARAMETERS: list = []
+FIXED_PARAMETERS: list = ["v_cons", "km_O2", "n_O2"]
 
 # List of parameter names that should be optimized within strict bounds
 # These parameters will be constrained to their defined bounds more strictly
@@ -81,7 +80,7 @@ class OptimizationConfig:
     """Configuration for standard parameter optimization."""
     
     # Number of independent optimization runs to perform
-    N_OPTIMIZATIONS: int = 1
+    N_OPTIMIZATIONS: int = 2
     
     # Maximum number of iterations per optimization
     MAXITER: int = 50
@@ -95,12 +94,12 @@ class OptimizationConfig:
 
     # Maximum number of objective function evaluations per ESS run.
     # The actual limit is max(ESS_MAX_EVAL, 1000 * n_params).
-    ESS_MAX_EVAL: int = 100_000
+    ESS_MAX_EVAL: int = 10_000
 
     # Size of the ESS reference set (RefSet).
     # Larger = more diversity but more evaluations per iteration.
     # Auto-scaled up to max(5, ceil((1 + sqrt(4n)) / 2)) if this is too small.
-    ESS_DIM_REFSET: int = 10
+    ESS_DIM_REFSET: int = 20
 
     # Minimum iterations before first local search.
     ESS_LOCAL_N1: int = 1
@@ -144,7 +143,7 @@ class OptimizationConfig:
     # Scaling factor for the initial diverse-set size used to seed the RefSet.
     # n_diverse = max(factor * n_params, factor * dim_refset).
     # Larger values improve basin coverage at the cost of more evaluations at startup.
-    ESS_N_DIVERSE_FACTOR: int = 10
+    ESS_N_DIVERSE_FACTOR: int = 20
 
     # Standard deviation (as fraction of bound width) for the perturbation-of-best
     # half of stagnation resets.  The other half still draws fresh LHS points.
@@ -166,7 +165,7 @@ class OptimizationConfig:
     # Enable/disable disk-inject (sharing best solutions across parallel workers).
     # Disable to keep workers fully independent; useful for A/B testing or when
     # monoculture / local-minimum trapping is suspected.
-    ESS_DISK_INJECT_ENABLED: bool = True
+    ESS_DISK_INJECT_ENABLED: bool = False
 
     # Number of ESS iterations each worker explores independently before
     # accepting any injected solution from disk.  Prevents early monoculture.

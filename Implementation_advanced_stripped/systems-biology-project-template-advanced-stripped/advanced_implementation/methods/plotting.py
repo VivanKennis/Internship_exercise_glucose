@@ -2,7 +2,7 @@ import os
 
 import matplotlib.pyplot as plt
 
-from advanced_implementation.common.plotting_functions import plot_figures, plot_PI_waterfall
+from common.plotting_functions import plot_figures, plot_PI_waterfall
 from common.utils import load_best_parameters
 import config
 

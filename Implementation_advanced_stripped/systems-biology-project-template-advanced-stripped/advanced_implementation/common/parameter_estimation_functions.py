@@ -46,8 +46,8 @@ def get_parameter_bounds(parameter_names, theta, optimize_indices, strict_bounds
 
     # Parameter-specific bounds
     param_bounds = {}
-    param_bounds["n_epi"] = (np.log(1), np.log(4))  # example: tighter bounds for parameter "n_epi"
-    param_bounds["p"]     = (np.log(1), np.log(5))  # example: tighter bounds for parameter "p"
+    param_bounds["n_O2"] = (np.log(1.0e-1), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
+    param_bounds["km_O2"] = (np.log(1e0), np.log(100e0))  # example: tighter bounds for parameter "km_O2"
 
     # Apply parameter-specific bounds
     for param, (lower, upper) in param_bounds.items():

@@ -3,7 +3,7 @@ import concurrent.futures as cf
 
 import os
 
-from advanced_implementation.common.parameter_estimation_functions import optimize
+from common.parameter_estimation_functions import optimize
 import config
 
 
