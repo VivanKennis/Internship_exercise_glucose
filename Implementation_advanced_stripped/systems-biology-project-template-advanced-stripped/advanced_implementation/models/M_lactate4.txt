@@ -1,5 +1,5 @@
 ########## NAME
-M_lactate2
+M_lactate4
 
 ########## METADATA
 time_unit = m
@@ -10,11 +10,12 @@ Epinephrine (EPI),
 Norepinephrine (NOR),
 Percentage of maximal oxygen consumption (PVo2max)
 
+km plus threshold
 """
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
-d/dt(O2_deficit) = - v_cons * f_hill(max(PVo2max-threshold,0), km_O2, n_O2) + k_restore * (O2b-O2_deficit)                                    # - consuption + restore
+d/dt(O2_deficit) = - v_cons * f_hill(PVo2max, km_O2 + threshold, n_O2) + k_restore * (O2b-O2_deficit)                                    # - consuption + restore
 d/dt(lactate) = vmax*f_hill(max(O2b-O2_deficit,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
 
 PVo2max(0) = 0.0    # dimensionless
@@ -27,7 +28,6 @@ v_cons = 10
 km_O2 = 1.0
 n_O2 = 4.0
 k_restore = 104.5
-threshold = 41.0
 
 # Lactate
 vmax = 10.0
@@ -35,7 +35,13 @@ km_lac = 1.0
 n_lac = 1.0
 elim_lactate = 0.01
 
+# threshold
+Vmax_thresh = 100.0
+Km_thresh = 0.68
+n_thresh = 1.0
+
 ########## VARIABLES
+threshold = Vmax_thresh * f_hill(Vo2max/90, Km_thresh, n_thresh)
 
 ########## FUNCTIONS
 f_hill(x, km, n) = x^n / (km^n + x^n)
@@ -53,7 +59,7 @@ Epib = Epib         @ 0.3     # basal epinephrine (nmol/)
 Norb = Norb         @ 1.3     # basal norepinephrine (nmol/L)
 Lacb = Lacb         @ 1.0     # basal Lactate (mmol/L)
 BW = BW           @ 84         # body weight (kg)
-#Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
+Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
 time_ex = time_ex @ 0
 O2b = O2b         @ 100.0
 

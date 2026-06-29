@@ -9,6 +9,12 @@ ROUNDING_PRECISION = 15 # offset pythons default rounding error of 2.2e-16 when 
 
 def f_cost(p: np.ndarray, sims: dict, data: dict, simulate_steady_state: bool = False, print_costs: bool = False) -> float:
     cost = 0
+    penalty = False
+    penalty_weight = 400.0
+    experiment = "Koivisto 40% untrained"
+    observable = "Lactate_mmolL"
+    index = 4
+
     for k_exp, d in data.items():
         try:
             sim = sims[k_exp]
@@ -29,6 +35,13 @@ def f_cost(p: np.ndarray, sims: dict, data: dict, simulate_steady_state: bool = 
                 obs_idx = np.clip(obs_idx, 0, len(sim.time_vector) - 1)
                 y_sim = y_sim[obs_idx]
                 cost += np.square((obs['Mean']-y_sim)/obs['SEM']).sum()
+
+                if penalty and k_exp == experiment and k_obs == observable and len(obs["Mean"]) > index:
+                    residual = (obs["Mean"][4] - y_sim[4]) / obs["SEM"][4]
+                    cost_penalty = penalty_weight * np.square(residual)
+                    cost += cost_penalty
+                    if print_costs:
+                        print(f"{k_exp}-{k_obs} cost_penalty: {cost_penalty}")
 
                 if print_costs:
                     c = np.square((obs['Mean']-y_sim)/obs['SEM']).sum()

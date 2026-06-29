@@ -56,7 +56,7 @@
         "Observables": {
             "Lactate_mmolL": {
                 "Time": [0, 15, 75, 135, 195],
-                "Mean": [0.98, 0.87, 0.84, 0.94,1.10],
+                "Mean": [0.98, 1.0, 1.08, 1.1, 1.2],
                 "SEM":  [0.13, 0.12, 0.07, 0.09, 0.09],
                 "unit": "mmol/L",
                 "plotting_info": {
@@ -121,11 +121,6 @@
              "BW": {
                 "t": [-Infinity],
                 "f": [71.8],
-                "type" : "constant"
-            },
-             "Vo2max": {
-                "t": [-Infinity],
-                "f": [0.0],
                 "type" : "constant"
             },
             "time_ex": {
@@ -237,7 +232,6 @@
                     "ylim": [0, 15],
                     "xlim": [0, 18]
                 }
-           
             }
         }
     }

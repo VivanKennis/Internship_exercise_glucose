@@ -46,8 +46,18 @@ def get_parameter_bounds(parameter_names, theta, optimize_indices, strict_bounds
 
     # Parameter-specific bounds
     param_bounds = {}
-    param_bounds["n_O2"] = (np.log(1.0e-1), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
-    param_bounds["km_O2"] = (np.log(1e0), np.log(100e0))  # example: tighter bounds for parameter "km_O2"
+
+    # param_bounds["n_O2"] = (np.log(1.0e0), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
+    # param_bounds["n_lac"] = (np.log(1.0e0), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
+
+    # param_bounds["v_cons"] = (np.log(1.0e-1), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    # param_bounds["vmax"] = (np.log(1.0e-1), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+
+    # param_bounds["km_O2"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    # param_bounds["km_lac"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+
+    # param_bounds["k_restore"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    # param_bounds["elim_lactate"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
 
     # Apply parameter-specific bounds
     for param, (lower, upper) in param_bounds.items():

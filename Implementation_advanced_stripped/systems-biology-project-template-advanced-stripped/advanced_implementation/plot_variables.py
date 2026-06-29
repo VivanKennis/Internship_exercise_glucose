@@ -14,26 +14,26 @@ from common.handle_data import load_and_process_data
 from common.simulation import create_sims_from_data, simulate_model
 from common.utils import load_best_parameters
 
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_NAME = "M_epinephrine18"
+MODEL_FILE = BASE_DIR / "models" / f"{MODEL_NAME}.txt"
+DATA_FILE = BASE_DIR / "data" / "data_epinephrine.json"
+RESULTS_DIR = BASE_DIR / "results" / MODEL_NAME
+FIGURES_DIR = BASE_DIR / "figures" / "variables"
 
 import sund
 try:
-    sund.uninstall_model("M_lactate2")
+    sund.uninstall_model(MODEL_NAME)
 except:
     pass
-sund.install_model(f"./models/M_lactate2.txt")
-
-BASE_DIR = Path(__file__).resolve().parent
-MODEL_NAME = "M_lactate2"
-MODEL_FILE = BASE_DIR / "models" / f"{MODEL_NAME}.txt"
-DATA_FILE = BASE_DIR / "data" / "data_lactate.json"
-RESULTS_DIR = BASE_DIR / "results" / MODEL_NAME
-FIGURES_DIR = BASE_DIR / "figures" / "variables"
+sund.install_model(f"./models/{MODEL_NAME}.txt")
 
 MODEL_VARIABLES = [
 	"PVo2max",
 	"lactate",
-	"O2",
+	"O2_deficit",
 	"met_stress",
+	"exercise_drive",
     "NOR_neuronal",
 	"NOR_adrenal",
     "Epi_adrenal",
@@ -45,19 +45,21 @@ EXPECTED_MODEL_FEATURES = {"NOR_neuronal", "NOR_adrenal", "Epi_adrenal"}
 
 DATA_ALIASES = {
 	"EPI": "Epinephrine_nmolL",
-	"NOR": "Norepinephrine_nmolL"
+	"NOR": "Norepinephrine_nmolL",
+	"lactate": "Lactate_mmolL"
 }
 
 DISPLAY_LABELS = {
 	"PVo2max": "PVo2max",
 	"lactate": "Lactate",
-	"O2": "Oxygen",
+	"O2_deficit": "Oxygen",
 	"met_stress": "metabolic stress",
 	"NOR_neuronal": "Noradrenaline nerves",
 	"NOR_adrenal": "Noradrenaline adrenal glands",
 	"Epi_adrenal": "Epinephrine adrenal glands",
 	"EPI": "Epinephrine",
 	"NOR": "Norepinephrine",
+	"exercise_drive": "Exercise Drive"
 }
 
 def sanitize_filename(name: str) -> str:

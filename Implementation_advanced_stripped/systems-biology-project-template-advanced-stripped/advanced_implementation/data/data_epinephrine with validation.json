@@ -794,6 +794,127 @@
             }
         }
     }, 
+    "Gaitanos 100%":{
+        "meta": {
+            "DOI": " 10.1152/jappl.1993.75.2.712", 
+            "kl": "-",
+            "meal": 5,
+            "age": 26.7,
+            "sex": "Male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 5,  5.1, 5.6, 5.7, 6.2, 6.3, 6.8, 6.9, 7.4, 7.5, 8.0, 8.1, 8.6, 8.7, 9.2, 9.3, 9.8, 9.9, 10.4, 10.5],
+                "f": [0,        100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100,  0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [4.8653],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [14.5008],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.38],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [1.82],
+                "type" : "constant"
+            },
+            "Lacb": { 
+                "t": [-Infinity],
+                "f": [0.66],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [71.8],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [20.5],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Epinephrine_nmolL": {
+                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
+                "Mean": [0.38, 1.92, 4.06, 5.11,  4.35,  1.76, 0.89,  1.05],
+                "SEM":  [0.29, 1.01, 1.56, 1.44,  1.88,  0.51, 0.42,  1.15],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 5,
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Gaitanos 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Epinephrine (nmol/L)",
+                    "ylim": [0, 6],
+                    "xlim": [0, 22]
+                }
+           
+            },
+            "Norepinephrine_nmolL": {
+                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
+                "Mean": [1.82, 3.36, 15.91, 22.33, 17.96, 11.02, 8.53, 7.53],
+                "SEM":  [0.45, 0.95, 2.49,  6.42,  3.13,  3.74,  3.64, 3.88],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 6,
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Gaitanos 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylim": [0, 23],
+                    "xlim": [0, 22]
+                }
+            },
+            "Lactate_mmolL": {
+                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
+                "Mean": [0.66, 1.87, 9.25, 12.60, 12.09, 12.20, 12.74, 11.66],
+                "SEM":  [0.08, 0.35, 0.54, 0.63,  0.39,  0.36,  0.38, 0.65],
+                "unit": "mmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 9,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Gaitanos 100%",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 13],
+                    "xlim": [0, 22]
+                }
+           
+            }
+        }
+    },
     "Lehmann 100%":{
         "meta": {
             "DOI": " 10.1007/BF00423406", 
@@ -1018,6 +1139,106 @@
                 }
             }
         }         
+    },
+    "Kjaer 110% trained":{
+        "meta": {
+            "doi": "10.1152/jappl.1986.61.5.1693", 
+            "kl": 800,
+            "meal": 12,
+            "age": 23,
+            "sex": "male"
+            },
+        "input": {
+            "intensity": {
+                "t": [-Infinity, 20, 27, 30, 32],
+                "f": [0, 60, 100, 110, 0],
+                "type" : "piecewise_constant"
+            }, 
+             "Gb": {
+                "t": [-Infinity],
+                "f": [5.1005],
+                "type" : "constant"
+            },
+            "Ib": {
+                "t": [-Infinity],
+                "f": [10.9700],
+                "type" : "constant"
+            },
+            "Epib": { 
+                "t": [-Infinity],
+                "f": [0.737959335511098],
+                "type" : "constant"
+            },
+            "Norb": { 
+                "t": [-Infinity],
+                "f": [2.34346929609668],
+                "type" : "constant"
+            },
+             "BW": {
+                "t": [-Infinity],
+                "f": [69],
+                "type" : "constant"
+            },
+             "Vo2max": {
+                "t": [-Infinity],
+                "f": [65],
+                "type" : "constant"
+            },
+            "time_ex": {
+                "t": [-Infinity],
+                "f": [20],
+                "type" : "constant"
+            }
+        },
+        "Observables": {
+            "Epinephrine_nmolL": {
+                "Time": [20, 27, 30, 32, 33, 37, 47, 62],
+                "Mean": [0.737959335511098, 0.886388207530722, 3.87714627823439, 8.69320282256658, 5.49242626800433, 1.44062496367166, 0.832889643226658, 0.883388939910025],
+                "SEM":  [0.118645447042001, 0.0949303077155559, 0.616523872077748, 1.61262947419816, 1.77863544948327, 0.331942200160425, 0.213506004347773, 0.213436253937990],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "figName": "Epinephrine_NE",
+                    "fig": 5,
+                    "subplot_idx": 12,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                            [255, 153, 102],
+                            [102, 153, 255],
+                            [102, 153, 255]
+                            ],                
+                    "marker": "o",
+                    "title": "Kjaer 110% trained",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Epinephrine (nmol/L)",
+                    "ylim": [0, 10],
+                    "xlim": [0, 65]
+                }
+            },
+            "Norepinephrine_nmolL": {
+                "Time": [20, 27, 30, 32, 33, 37, 47, 62],
+                "Mean": [2.34346929609668, 3.98635268659154, 12.0026947574718, 21.9089396537645, 28.5448309652131, 11.4021925526703, 5.13208394577821, 3.72580842724155],
+                "SEM":  [0.384666421688713, 0.512769475747184, 0.993589743589745, 2.21153846153846, 4.32692307692308, 1.34610280908052, 0.448820022864613, 0.512820512820515],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "figName": "Norepinephrine_NE",
+                    "fig": 6,
+                    "subplot_idx": 12,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                            [255, 153, 102],
+                            [102, 153, 255],
+                            [102, 153, 255]
+                            ],                
+                    "marker": "o",
+                    "title": "Kjaer 110% trained",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylim": [0, 45],
+                    "xlim": [0, 65]
+                }
+            }
+
+        }
     }
 }
          

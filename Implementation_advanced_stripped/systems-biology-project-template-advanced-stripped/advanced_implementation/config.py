@@ -11,7 +11,7 @@ When starting a new project, modify the settings in this file to match your need
 
 # Name of the model file (without .txt extension)
 # The model file should be located in the ./models/ directory
-MODEL_NAME: str = "M_lactate2"
+MODEL_NAME: str = "M_epinephrine18" #"M_epinephrine16"
 
 # Set to True if the model needs to simulate a steady state before running experiments
 SIMULATE_STEADY_STATE: bool = True
@@ -40,7 +40,7 @@ DO_PLOT_ONLY: bool = False
 # ============================================================================
 
 # Path to the data file
-DATA_FILE: str = "./data/data_lactate.json"
+DATA_FILE: str = "./data/data_epinephrine.json"
 
 # Set to True to print degrees of freedom during data loading
 PRINT_DOF: bool = False
@@ -65,7 +65,7 @@ PRINT_ITERATIONS: bool = True
 # List of parameter names that should be fixed during optimization
 # These parameters will not be changed during the optimization process
 # Example: ["k1", "k2", "kfeed"]
-FIXED_PARAMETERS: list = ["v_cons", "km_O2", "n_O2"]
+FIXED_PARAMETERS: list = ["vmax_thresh", "km_thresh", "n_thresh", "v_cons", "km_O2", "n_O2", "k_restore", "vmax_lac", "km_lac", "n_lac", "elim_lactate"]
 
 # List of parameter names that should be optimized within strict bounds
 # These parameters will be constrained to their defined bounds more strictly
@@ -80,10 +80,10 @@ class OptimizationConfig:
     """Configuration for standard parameter optimization."""
     
     # Number of independent optimization runs to perform
-    N_OPTIMIZATIONS: int = 2
+    N_OPTIMIZATIONS: int = 3
     
     # Maximum number of iterations per optimization
-    MAXITER: int = 50
+    MAXITER: int = 100
     
     # Set to True to run optimizations in parallel (faster but uses more CPU)
     RUN_IN_PARALLEL: bool = True
