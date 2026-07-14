@@ -1,5 +1,5 @@
 ########## NAME
-M_lactate3
+M_lactate5
 
 ########## METADATA
 time_unit = m
@@ -10,13 +10,13 @@ Epinephrine (EPI),
 Norepinephrine (NOR),
 Percentage of maximal oxygen consumption (PVo2max)
 
-training level instead of threshold
+o2 deficit met push term 
 """
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
-d/dt(O2_deficit) =  max(vmax_o2 * max(PVo2max-threshold,0),0) - k_restore * O2_deficit                                   # - consuption + restore
-d/dt(lactate) = vmax_lac * f_hill(max(O2_deficit,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
+d/dt(O2_deficit) = v_cons * f_hill(max(PVo2max-threshold,0), km_O2, n_O2) - k_restore * O2_deficit + (k_push *  max(time - time_ex, 0) + k_push2) * PVo2max* sign(u3)                                   # - consuption + restore
+d/dt(lactate) = vmax*f_hill(O2_deficit, km_lac, n_lac) +  - elim_lactate*(lactate-Lacb) 
 
 PVo2max(0) = 0.0    # dimensionless
 lactate(0) = 1.0    # mmol/L
@@ -24,14 +24,19 @@ O2_deficit(0) = 0.0  # %
 
 ########## PARAMETERS
 # O2_deficit
-vmax_o2 = 2.9
-k_restore = 5
+v_cons = 0.64
+km_O2 = 9.33
+n_O2 = 1.037
+k_restore = 10.0
+
+k_push = 1.0
+k_push2 = 1.0
 
 # Lactate
-km_lac = 0.01
-elim_lactate = 0.0345
-n_lac = 1.0
-vmax_lac = 10.0
+vmax = 7.5
+km_lac = 0.118
+n_lac = 1.9
+elim_lactate = 0.073
 
 # Aerobic threshold
 vmax_thresh = 100.0
@@ -44,7 +49,6 @@ threshold = vmax_thresh * f_hill(Vo2max/90, km_thresh, n_thresh)    # Aerobic th
 ########## FUNCTIONS
 f_hill(x, km, n) = x^n / (km^n + x^n)
 f_mm (x, km) = x / (km + x) 
-f_2(x, a) = a * (x^2) 
 
 ########## EVENTS
 event_basal = gt(time, -INFINITY), lactate, Lacb, O2_deficit, O2b

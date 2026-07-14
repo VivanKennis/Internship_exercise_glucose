@@ -1,5 +1,5 @@
 ########## NAME
-M_lactate3
+M_lactate6
 
 ########## METADATA
 time_unit = m
@@ -15,8 +15,8 @@ training level instead of threshold
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
-d/dt(O2_deficit) =  max(vmax_o2 * max(PVo2max-threshold,0),0) - k_restore * O2_deficit                                   # - consuption + restore
-d/dt(lactate) = vmax_lac * f_hill(max(O2_deficit,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
+d/dt(O2_deficit) = v_cons_eff * f_hill(max(PVo2max-threshold,0), km_O2, n_O2) - k_restore * O2_deficit                          # - consuption + restore
+d/dt(lactate) = vmax*f_hill(O2_deficit, km_lac, n_lac) - elim_lactate*(lactate-Lacb) 
 
 PVo2max(0) = 0.0    # dimensionless
 lactate(0) = 1.0    # mmol/L
@@ -24,14 +24,17 @@ O2_deficit(0) = 0.0  # %
 
 ########## PARAMETERS
 # O2_deficit
-vmax_o2 = 2.9
-k_restore = 5
+km_O2 = 10.0
+n_O2 = 1.07
+k_restore = 10.0
+v_base = 0.016
+v_scale = 3.04
 
 # Lactate
-km_lac = 0.01
-elim_lactate = 0.0345
-n_lac = 1.0
-vmax_lac = 10.0
+vmax = 10.0
+km_lac = 10.0
+n_lac = 4.0
+elim_lactate = 0.67
 
 # Aerobic threshold
 vmax_thresh = 100.0
@@ -40,11 +43,11 @@ n_thresh = 1.0
 
 ########## VARIABLES
 threshold = vmax_thresh * f_hill(Vo2max/90, km_thresh, n_thresh)    # Aerobic threshold
+v_cons_eff = v_base + v_scale * (PVo2max - threshold)
 
 ########## FUNCTIONS
 f_hill(x, km, n) = x^n / (km^n + x^n)
 f_mm (x, km) = x / (km + x) 
-f_2(x, a) = a * (x^2) 
 
 ########## EVENTS
 event_basal = gt(time, -INFINITY), lactate, Lacb, O2_deficit, O2b

@@ -15,7 +15,7 @@ from common.simulation import create_sims_from_data, simulate_model
 from common.utils import load_best_parameters
 
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_NAME = "M_epinephrine18"
+MODEL_NAME = "M_epinephrine23"
 MODEL_FILE = BASE_DIR / "models" / f"{MODEL_NAME}.txt"
 DATA_FILE = BASE_DIR / "data" / "data_epinephrine.json"
 RESULTS_DIR = BASE_DIR / "results" / MODEL_NAME
@@ -38,7 +38,8 @@ MODEL_VARIABLES = [
 	"NOR_adrenal",
     "Epi_adrenal",
 	"EPI",
-	"NOR"
+	"NOR",
+	"threshold"
 ]
 
 EXPECTED_MODEL_FEATURES = {"NOR_neuronal", "NOR_adrenal", "Epi_adrenal"}
@@ -54,12 +55,13 @@ DISPLAY_LABELS = {
 	"lactate": "Lactate",
 	"O2_deficit": "Oxygen",
 	"met_stress": "metabolic stress",
-	"NOR_neuronal": "Noradrenaline nerves",
-	"NOR_adrenal": "Noradrenaline adrenal glands",
+	"NOR_neuronal": "Norepinephrine nerves",
+	"NOR_adrenal": "Norepinephrine adrenal glands",
 	"Epi_adrenal": "Epinephrine adrenal glands",
 	"EPI": "Epinephrine",
 	"NOR": "Norepinephrine",
-	"exercise_drive": "Exercise Drive"
+	"exercise_drive": "Exercise Drive",
+	"threshold": "Threshold"
 }
 
 def sanitize_filename(name: str) -> str:

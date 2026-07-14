@@ -1,0 +1,150 @@
+########## NAME
+M_epinephrine22
+
+########## METADATA
+time_unit = m
+description = """
+
+This model describes the Epinephrine and Norepinephrine dynamics during excercise.
+Epinephrine (EPI),
+Norepinephrine (NOR),
+Percentage of maximal oxygen consumption (PVo2max)
+
+stimulation nor neural and adrenal changed to separated hill functions
+
+"""
+########## MACROS
+########## STATES
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
+d/dt(O2_deficit) = v_cons* f_hill(max(PVo2max-threshold,0), km_O2, n_O2) - k_restore * O2_deficit                          # - consuption + restore
+d/dt(lactate) = vmax_lac*f_mm(max(O2_deficit,0), km_lac) - elim_lactate*(lactate-Lacb)
+
+d/dt(met_stress) = f_2(max(PVo2max-threshold,0), k_stress) + lac_stress * max(lactate-Lacb,0) - elim_stress*met_stress
+d/dt(exercise_drive) = (k_push *  max(time - time_ex, 0) + k_push2) * PVo2max* max(sign(u3),0) - k_rec_drive * exercise_drive
+
+# Neuron
+d/dt(NOR_neuronal) = Vmax_stres_n * f_hill(max(met_stress,0), km_stres_n, n_stres_n) + Vmax_ex_n * f_mm(max(exercise_drive,0), km_ex_n) - spill * NOR_neuronal - elim_NOR_neuronal * NOR_neuronal  # Norepinephrine (nmol/L/min)                          
+
+# Adrenal glands
+d/dt(NOR_adrenal) = Vmax_stres_a_eff * f_hill(max(met_stress,0), km_stres_a, n_stres_a) + Vmax_ex_a_eff * f_hill(max(exercise_drive,0), km_ex_a, n_ex_a) - release_nor_adrenal * NOR_adrenal - conv_nor_to_epi * NOR_adrenal  # Norepinephrine (nmol/L/min)
+d/dt(Epi_adrenal) = conv_nor_to_epi * NOR_adrenal - release_epi * Epi_adrenal                                                                                                                           # Epinephrine (nmol/L/min)
+
+# Plasma
+d/dt(NOR)    = spill * NOR_neuronal + release_nor_adrenal * NOR_adrenal- elim_nor_plasma*(NOR-Norb)                     # Norepinephrine (nmol/L/min)
+d/dt(EPI)    = release_epi * Epi_adrenal - elim_epi_plasma * (EPI-Epib)                                                 # Epinephrine (nmol/L/min)
+
+# Initial values
+PVo2max(0) = 0.0    # dimensionless
+O2_deficit(0) = 0.0  # %
+lactate(0) = 1.0    # mmol/L
+
+met_stress(0)  = 0
+exercise_drive(0) = 0.0
+
+NOR_neuronal(0)= 0.0
+NOR_adrenal(0) = 0.0
+Epi_adrenal(0) = 0.0 
+
+NOR(0) = 1.3  # nmol/L
+EPI(0) = 0.3  # nmol/L
+
+########## PARAMETERS
+# Aerobic threshold
+vmax_thresh = 100.0
+km_thresh = 0.68
+
+# O2_deficit
+v_cons = 99.9999
+km_O2 = 99.9999
+n_O2 = 4.0
+k_restore = 100.0
+
+# Lactate
+vmax_lac = 100
+km_lac = 0.0615
+elim_lactate = 4.64 
+
+# met_stress
+k_stress = 0.01
+elim_stress = 0.725   
+lac_stress = 0.5
+
+# exercise_drive
+k_push = 0.00016
+k_push2 = 0.00017
+k_rec_drive = 0.005
+
+# NOR_neuronal
+Vmax_stres_n = 11
+km_stres_n = 10.0
+n_stres_n = 1.05
+Vmax_ex_n = 18
+km_ex_n = 15.0
+
+spill = 0.1
+elim_NOR_neuronal = 0.5
+
+# NOR_adrenal
+Vmax_stres_a = 15.0
+km_stres_a = 15.0
+n_stres_a = 1.05
+Vmax_ex_a = 0.5
+km_ex_a = 20 
+n_ex_a = 1.05
+scale = 0.01
+
+conv = 0.5
+
+# Epi_adrenal
+release_epi = 0.95 
+
+# NOR plasma
+elim_nor_plasma = 0.5
+
+# Epi
+elim_epi_plasma = 0.8 
+
+########## VARIABLES
+release_nor_adrenal = conv*0.2
+conv_nor_to_epi = conv*0.8
+
+Vmax_stres_a_eff = Vmax_stres_a * (1+ scale * max(Vo2max-40,0))
+Vmax_ex_a_eff = Vmax_ex_a * (1+ scale * max(Vo2max-40,0))
+
+threshold = vmax_thresh * f_mm(Vo2max/90, km_thresh)    # Aerobic threshold
+
+########## FUNCTIONS
+f_hill(x, km, n) = x^n / (km^n + x^n)
+f_mm(x, km) = x / (km + x) 
+f_2(x, a) = a * (x^2) 
+
+########## EVENTS
+event_basal = gt(time, -INFINITY), O2_deficit, 0, met_stress, 0, lactate, Lacb, NOR, Norb, EPI, Epib 
+
+########## OUTPUTS
+########## INPUTS
+u3 = intensity  @ 0          # exercise intensity (%)
+Ib = Ib         @ 12.0       # basal insulin level (mU/L)
+Gb = Gb         @ 4.9750     # basal plasma glucose (mmol/L)
+Epib = Epib         @ 0.3     # basal epinephrine (nmol/)
+Norb = Norb         @ 1.3     # basal norepinephrine (nmol/L)
+Lacb = Lacb         @ 1.0     # basal Lactate (mmol/L)
+BW = BW           @ 84         # body weight (kg)
+time_ex = time_ex @ 0
+Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
+
+########## FEATURES
+PVo2max = PVo2max
+O2_deficit = O2_deficit
+Lactate_mmolL = lactate
+lactate = lactate
+met_stress = met_stress
+NOR_neuronal = NOR_neuronal
+NOR_adrenal = NOR_adrenal
+Epi_adrenal = Epi_adrenal
+Norepinephrine_nmolL = NOR
+Epinephrine_nmolL = EPI
+EPI = EPI
+NOR = NOR
+exercise_drive = exercise_drive
+threshold = threshold

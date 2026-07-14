@@ -10,7 +10,7 @@ Epinephrine (EPI),
 Norepinephrine (NOR),
 Percentage of maximal oxygen consumption (PVo2max)
 
-time added
+Old lactate model
 """
 ########## MACROS
 ########## STATES

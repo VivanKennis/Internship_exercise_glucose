@@ -100,8 +100,8 @@ elim_nor_plasma = 0.5
 elim_epi_plasma = 2
 
 ########## VARIABLES
-stim_nor_n = k_exc_nor*PVo2max + k_stress_nor*met_stress
-stim_nor_a = k_exc_nor*PVo2max + k_stress_nor*met_stress        
+stim_nor_n = k_exc_nor*exercise_drive + k_stress_nor*met_stress
+stim_nor_a = k_exc_nor*exercise_drive + k_stress_nor*met_stress        
 
 release_nor_adrenal = conv*0.2
 conv_nor_to_epi = conv*0.8

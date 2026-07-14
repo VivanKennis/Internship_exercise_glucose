@@ -11,7 +11,7 @@ When starting a new project, modify the settings in this file to match your need
 
 # Name of the model file (without .txt extension)
 # The model file should be located in the ./models/ directory
-MODEL_NAME: str = "M_epinephrine18" #"M_epinephrine16"
+MODEL_NAME: str = "M_glucose2"
 
 # Set to True if the model needs to simulate a steady state before running experiments
 SIMULATE_STEADY_STATE: bool = True
@@ -21,7 +21,7 @@ SIMULATE_STEADY_STATE: bool = True
 # ============================================================================
 
 # Set to True to run parameter optimization
-DO_PARAMETER_ESTIMATION: bool = True
+DO_PARAMETER_ESTIMATION: bool = True 
 
 # Set to True to run parameter identifiability analysis
 DO_PARAMETER_IDENTIFIABILITY: bool = False
@@ -40,14 +40,14 @@ DO_PLOT_ONLY: bool = False
 # ============================================================================
 
 # Path to the data file
-DATA_FILE: str = "./data/data_epinephrine.json"
+DATA_FILE: str = "./data/data_incl_glucose.json"
 
 # Set to True to print degrees of freedom during data loading
 PRINT_DOF: bool = False
 
 # Define which experiments are used for validation (not optimization)
 # Example: {"Experiment3", "Experiment4"}
-VALIDATION_EXPERIMENTS: set = {"Kjaer 110% trained", "Gaitanos 100%"}
+VALIDATION_EXPERIMENTS: set = {"Kjaer 100% trained"}
 
 # Significance level for chi-square thresholds
 CHI2_SIGNIFICANCE_LEVEL: float = 0.05
@@ -65,7 +65,7 @@ PRINT_ITERATIONS: bool = True
 # List of parameter names that should be fixed during optimization
 # These parameters will not be changed during the optimization process
 # Example: ["k1", "k2", "kfeed"]
-FIXED_PARAMETERS: list = ["vmax_thresh", "km_thresh", "n_thresh", "v_cons", "km_O2", "n_O2", "k_restore", "vmax_lac", "km_lac", "n_lac", "elim_lactate"]
+FIXED_PARAMETERS: list =["vmax_thresh", "km_thresh", "vmax_o2", "k_O2", "vmax_lac", "km_lac", "n_lac", "elim_lactate", "k_stress", "elim_stress", "lac_stress", "k_push", "k_push2", "k_rec_drive", "Vmax_stres_n", "km_stres_n", "n_stres_n", "Vmax_ex_n", "km_ex_n", "spill", "elim_NOR_neuronal", "Vmax_stres_a", "km_stres_a", "Vmax_ex_a", "km_ex_a", "n_ex_a", "scale", "conv", "release_epi", "elim_nor_plasma", "elim_epi_plasma"] 
 
 # List of parameter names that should be optimized within strict bounds
 # These parameters will be constrained to their defined bounds more strictly
@@ -80,10 +80,10 @@ class OptimizationConfig:
     """Configuration for standard parameter optimization."""
     
     # Number of independent optimization runs to perform
-    N_OPTIMIZATIONS: int = 3
+    N_OPTIMIZATIONS: int = 5
     
     # Maximum number of iterations per optimization
-    MAXITER: int = 100
+    MAXITER: int = 1000
     
     # Set to True to run optimizations in parallel (faster but uses more CPU)
     RUN_IN_PARALLEL: bool = True

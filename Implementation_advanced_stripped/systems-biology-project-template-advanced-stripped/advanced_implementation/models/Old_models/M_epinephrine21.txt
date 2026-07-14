@@ -1,5 +1,5 @@
 ########## NAME
-M_epinephrine16
+M_epinephrine21
 
 ########## METADATA
 time_unit = m
@@ -10,33 +10,37 @@ Epinephrine (EPI),
 Norepinephrine (NOR),
 Percentage of maximal oxygen consumption (PVo2max)
 
-lactate added
+stimulation nor neural and adrenal changed to separated hill functions
+
 """
 ########## MACROS
 ########## STATES
 d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                                       # Percentage of maximal oxygen consumption (dimensionless)
-d/dt(O2_deficit) = v_cons * f_hill(max(PVo2max-threshold,0), km_O2, n_O2) - k_restore * O2_deficit                                   # - consuption + restore
+d/dt(O2_deficit) = v_cons* f_hill(max(PVo2max-threshold,0), km_O2, n_O2) - k_restore * O2_deficit                          # - consuption + restore
 d/dt(lactate) = vmax_lac*f_hill(max(O2_deficit,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
 
-d/dt(met_stress) = Vmax_stress * f_hill(max(PVo2max,0), Km_stress, n_stress) + lac_stress * lactate + elim_stress*met_stress
+d/dt(met_stress) = Vmax_stress * f_hill(max(PVo2max-threshold,0), km_stress, n_stress) + lac_stress * max(lactate-Lacb,0) - elim_stress*met_stress
+d/dt(exercise_drive) = (k_push *  max(time - time_ex, 0) + k_push2) * PVo2max* max(sign(u3),0) - k_rec_drive * exercise_drive
 
 # Neuron
-d/dt(NOR_neuronal) = Vmax_nor_n * f_mm(stim_nor_n, km_nor_n) - spill * NOR_neuronal - reuptake * NOR_neuronal - elim_NOR_neuronal * NOR_neuronal                                
+d/dt(NOR_neuronal) = Vmax_stres_n * f_hill(max(met_stress,0), km_stres_n, n_stres_n) + Vmax_ex_n * f_hill(max(exercise_drive,0), km_ex_n, n_ex_n) - spill * NOR_neuronal - elim_NOR_neuronal * NOR_neuronal  # Norepinephrine (nmol/L/min)                          
 
 # Adrenal glands
-d/dt(NOR_adrenal) = Vmax_nor_a * f_mm(stim_nor_a, km_nor_a) - release_nor_adrenal * NOR_adrenal - conv_nor_to_epi * NOR_adrenal
-d/dt(Epi_adrenal) = conv_nor_to_epi * NOR_adrenal - release_epi * Epi_adrenal
+d/dt(NOR_adrenal) = Vmax_stres_a * f_hill(max(met_stress,0), km_stres_a, n_stres_a) + Vmax_ex_a * f_hill(max(exercise_drive,0), km_ex_a, n_ex_a) + scale * Vo2max - release_nor_adrenal * NOR_adrenal - conv_nor_to_epi * NOR_adrenal  # Norepinephrine (nmol/L/min)
+d/dt(Epi_adrenal) = conv_nor_to_epi * NOR_adrenal - release_epi * Epi_adrenal                                                                                                                           # Epinephrine (nmol/L/min)
 
 # Plasma
 d/dt(NOR)    = spill * NOR_neuronal + release_nor_adrenal * NOR_adrenal- elim_nor_plasma*(NOR-Norb)                     # Norepinephrine (nmol/L/min)
-d/dt(EPI)    = release_epi * Epi_adrenal - elim_epi_plasma * (EPI-Epib)                        
+d/dt(EPI)    = release_epi * Epi_adrenal - elim_epi_plasma * (EPI-Epib)                                                 # Epinephrine (nmol/L/min)
 
 # Initial values
 PVo2max(0) = 0.0    # dimensionless
-lactate(0) = 1.0    # mmol/L
 O2_deficit(0) = 0.0  # %
+lactate(0) = 1.0    # mmol/L
 
 met_stress(0)  = 0
+exercise_drive(0) = 0.0
+
 NOR_neuronal(0)= 0.0
 NOR_adrenal(0) = 0.0
 Epi_adrenal(0) = 0.0 
@@ -51,51 +55,61 @@ km_thresh = 0.68
 n_thresh = 1.0
 
 # O2_deficit
-v_cons = 0.64
-km_O2 = 9.33
-n_O2 = 1.037
-k_restore = 10.0
+v_cons = 99.99
+km_O2 =99.99
+n_O2 = 4.0
+k_restore = 100.0
 
 # Lactate
-vmax_lac = 7.5
-km_lac = 0.118
-n_lac = 1.9
-elim_lactate = 0.073
+vmax_lac = 100
+km_lac = 0.0615
+n_lac = 1.0
+elim_lactate = 4.64 
 
 # met_stress
-Vmax_stress = 0.01        
-Km_stress = 0.1           
-n_stress = 0.1
-elim_stress = 10   
-lac_stress = 1
+Vmax_stress = 10.0       
+km_stress = 40.0           
+n_stress = 1.0
+elim_stress = 0.5   
+lac_stress = 1.2
+
+# exercise_drive
+k_push = 0.000016
+k_push2 = 0.00017
+k_rec_drive = 0.005
 
 # NOR_neuronal
-Vmax_nor_n = 50
-km_nor_n = 50       
+Vmax_stres_n = 110
+km_stres_n = 10.0
+n_stres_n = 1.0
+Vmax_ex_n = 18
+km_ex_n = 15.0
+n_ex_n = 1.0
+
 spill = 0.1
-reuptake = 0.5
 elim_NOR_neuronal = 0.5
-k_exc_nor = 1
-k_stress_nor = 0.5
-conv = 1.6
 
 # NOR_adrenal
-Vmax_nor_a = 10
-km_nor_a = 50
+Vmax_stres_a = 15.0
+km_stres_a = 15.0
+n_stres_a = 1.0
+Vmax_ex_a = 0.5
+km_ex_a = 20 
+n_ex_a = 1.0
+scale = 0.001
+
+conv = 1.6
 
 # Epi_adrenal
-release_epi = 2
+release_epi = 1.0 #estimate
 
 # NOR plasma
 elim_nor_plasma = 0.5
 
 # Epi
-elim_epi_plasma = 2
+elim_epi_plasma = 0.8 #estimate
 
 ########## VARIABLES
-stim_nor_n = k_exc_nor*PVo2max + k_stress_nor*met_stress
-stim_nor_a = k_exc_nor*PVo2max + k_stress_nor*met_stress        
-
 release_nor_adrenal = conv*0.2
 conv_nor_to_epi = conv*0.8
 
@@ -106,7 +120,7 @@ f_hill(x, km, n) = x^n / (km^n + x^n)
 f_mm (x, km) = x / (km + x) 
 
 ########## EVENTS
-event_basal = gt(time, -INFINITY), lactate, Lacb, O2_deficit, O2b, NOR, Norb, EPI, Epib 
+event_basal = gt(time, -INFINITY), O2_deficit, O2b, met_stress, 0, lactate, Lacb, NOR, Norb, EPI, Epib 
 
 ########## OUTPUTS
 ########## INPUTS
@@ -121,7 +135,6 @@ time_ex = time_ex @ 0
 O2b = O2b         @ 0.0
 Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
 
-
 ########## FEATURES
 PVo2max = PVo2max
 O2_deficit = O2_deficit
@@ -135,3 +148,5 @@ Norepinephrine_nmolL = NOR
 Epinephrine_nmolL = EPI
 EPI = EPI
 NOR = NOR
+exercise_drive = exercise_drive
+threshold = threshold

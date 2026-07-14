@@ -12,16 +12,6 @@
                 "f": [0, 40.5, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.249],
@@ -35,11 +25,6 @@
             "Lacb": { 
                 "t": [-Infinity],
                 "f": [0.98],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [74],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -56,8 +41,8 @@
         "Observables": {
             "Epinephrine_nmolL": {
                 "Time": [0, 15, 75, 135, 195],
-                "Mean": [0.249, 0.266, 0.297, 0.768, 1.706],
-                "SEM":  [0.050, 0.199, 0.013, 0.118, 0.436],
+                "Mean": [0.249, 0.266, 0.297, 0.668, 0.700],
+                "SEM":  [0.050, 0.199, 0.013, 0.118, 0.116],
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
@@ -94,7 +79,7 @@
                     "marker": "o",
                     "title": "Koivisto 40% untrained",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 200]
                 }
@@ -106,6 +91,7 @@
                 "SEM":  [0.13, 0.12, 0.07, 0.09, 0.09],
                 "unit": "mmol/L",
                 "plotting_info": {
+                    "figName": "Lactate_NE",
                     "fig": 7,
                     "subplot_idx": 1,
                     "shape": [4, 3],
@@ -139,16 +125,6 @@
                 "f": [0, 50, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.7793],
-                "type" : "constant"
-            },
-            "Ib": { 
-                "t": [-Infinity],
-                "f": [11.1973],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.291847165518746],
@@ -157,11 +133,6 @@
             "Norb": { 
                 "t": [-Infinity],
                 "f": [1.37704918032787],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [72.6],
                 "type" : "constant"
             },
             "Vo2max": {
@@ -217,7 +188,7 @@
                     "marker": "o",
                     "title": "Kreisman 50%",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 205]
                 }
@@ -238,16 +209,6 @@
                 "f": [0, 51, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.237315265486726],
@@ -256,11 +217,6 @@
             "Norb": { 
                 "t": [-Infinity],
                 "f": [0.972796460176992],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [73.3],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -277,7 +233,7 @@
         "Observables": {
             "Epinephrine_nmolL": {
                 "Time": [20, 45, 55, 65, 80, 95, 110, 125, 145, 155, 186, 245, 305],
-                "Mean": [0.237315265486726, 0.496204646017699, 0.546544247787611, 0.575309734513274, 0.589692477876106, 0.640032079646018, 0.942069690265487, 1.31602101769912, 0.201358407079646, 0.201358407079646, 0.208549778761062, 0.186975663716814, 0.201358407079646],
+                "Mean": [0.237315265486726, 0.496204646017699, 0.546544247787611, 0.575309734513274, 0.589692477876106, 0.640032079646018, 0.65, 0.60, 0.201358407079646, 0.201358407079646, 0.208549778761062, 0.186975663716814, 0.201358407079646],
                 "SEM":  [0.0359568584070798, 0.0791050884955752, 0.0791050884955752, 0.0791050884955752, 0.0862964601769911, 0.0719137168141594, 0.151018805309735, 0.194167035398230, 0.0431482300884953, 0.0143827433628318, 0.0215741150442477, 0.0287654867256639, 0.0287654867256635],
                 "unit": "nmol/L",
                 "plotting_info": {
@@ -315,7 +271,7 @@
                     "marker": "o",
                     "title": "Horton 51% men",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 350]
                 }
@@ -337,16 +293,6 @@
                 "f": [0, 60, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.220],
@@ -355,11 +301,6 @@
             "Norb": { 
                 "t": [-Infinity],
                 "f": [1.07],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [75.4],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -414,7 +355,7 @@
                     "marker": "o",
                     "title": "Hirsch 60%",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 160]
                 }
@@ -436,16 +377,6 @@
                 "f": [0, 60, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.278],
@@ -456,9 +387,9 @@
                 "f": [2.53],
                 "type" : "constant"
             },
-             "BW": {
+            "Lacb": { 
                 "t": [-Infinity],
-                "f": [78],
+                "f": [1.08],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -475,7 +406,7 @@
         "Observables": {
             "Epinephrine_nmolL": {
                 "Time": [0, 30, 60, 90],
-                "Mean": [0.278, 0.841, 1.053, 2.227],
+                "Mean": [0.278, 0.841, 1.053, 1.227],
                 "SEM":  [0.046, 0.112, 0.208, 0.507],
                 "unit": "nmol/L",
                 "plotting_info": {
@@ -513,11 +444,55 @@
                     "marker": "o",
                     "title": "Carter 60% men",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
+                    "ylim": [0, 15],
+                    "xlim": [0, 100]
+                },
+            "Lactate_mmolL": {
+                "Time": [0,    30,   60,   75,   90],
+                "Mean": [1.08, 2.11, 2.73, 2.40, 2.37],
+                "SEM":  [0.25, 0.45, 0.33, 0.30, 0.30],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 3,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Carter 60% men",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 100]
                 }
+            }
            
+            },
+            "Lactate_mmolL": {
+                "Time": [0,    30,   60,   75,   90],
+                "Mean": [1.08, 2.11, 2.73, 2.40, 2.37],
+                "SEM":  [0.25, 0.45, 0.33, 0.30, 0.30],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 5,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Carter 60% men",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 16],
+                    "xlim": [0, 102]
+                }
             }
         }
     },
@@ -535,16 +510,6 @@
                 "f": [0, 60, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.300],
@@ -555,9 +520,9 @@
                 "f": [2.19],
                 "type" : "constant"
             },
-             "BW": {
+            "Lacb": { 
                 "t": [-Infinity],
-                "f": [66],
+                "f": [1.08],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -574,7 +539,7 @@
         "Observables": {
             "Epinephrine_nmolL": {
                 "Time": [0, 30, 60, 90],
-                "Mean": [0.300, 0.972, 0.982, 1.342],
+                "Mean": [0.300, 0.972, 0.982, 1.100],
                 "SEM":  [0.077, 0.199, 0.204, 0.230],
                 "unit": "nmol/L",
                 "plotting_info": {
@@ -612,11 +577,33 @@
                     "marker": "o",
                     "title": "Carter 60% women",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 15],
                     "xlim": [0, 100]
                 }
            
+            },
+            "Lactate_mmolL": {
+                "Time": [0,    30,   60,   75,   90],
+                "Mean": [1.08, 2.11, 2.73, 2.40, 2.37],
+                "SEM":  [0.25, 0.45, 0.33, 0.30, 0.30],
+                "unit": "nmol/L",
+                "plotting_info": {
+                    "fig": 7,
+                    "subplot_idx": 6,
+                    "shape": [4, 3],
+                    "plot_colors": [
+                        [255, 153, 102],
+                        [102, 153, 255],
+                        [102, 153, 255]
+                        ],
+                    "marker": "o",
+                    "title": "Carter 60% women",
+                    "xlabel": "Time (minutes)",
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 16],
+                    "xlim": [0, 102]
+                }
             }
         }
     }, 
@@ -634,16 +621,6 @@
                 "f": [0, 87, 0],
                 "type" : "piecewise_constant"
             },
-            "Gb": {
-                "t": [-Infinity],
-                "f": [4.6821],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [12.3922],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.430784134216186],
@@ -652,11 +629,6 @@
             "Norb": { 
                 "t": [-Infinity],
                 "f": [2.16976215294230],
-                "type" : "constant"
-            },
-            "BW": {
-                "t": [-Infinity],
-                "f": [71.3],
                 "type" : "constant"
             },
             "Vo2max": {
@@ -679,7 +651,7 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 8,
+                    "subplot_idx": 7,
                     "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
@@ -702,7 +674,7 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 8,
+                    "subplot_idx": 7,
                     "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
@@ -712,7 +684,7 @@
                     "marker": "o",
                     "title": "Kreisman 87%",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 45],
                     "xlim": [40, 175]
                 }
@@ -733,16 +705,6 @@
                 "f": [0, 28, 54, 83, 100, 0],
                 "type" : "piecewise_constant"
             }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.239],
@@ -751,11 +713,6 @@
             "Norb": { 
                 "t": [-Infinity],
                 "f": [2.19],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [66.06],
                 "type" : "constant"
             },
              "Vo2max": {
@@ -777,7 +734,7 @@
                 "unit": "nmol/L",
                 "plotting_info": {
                     "fig": 5,
-                    "subplot_idx": 7,
+                    "subplot_idx": 8,
                     "shape": [4, 3],
                     "plot_colors": [
                         [255, 153, 102],
@@ -794,254 +751,7 @@
             }
         }
     }, 
-    "Gaitanos 100%":{
-        "meta": {
-            "DOI": " 10.1152/jappl.1993.75.2.712", 
-            "kl": "-",
-            "meal": 5,
-            "age": 26.7,
-            "sex": "Male"
-            },
-        "input": {
-            "intensity": {
-                "t": [-Infinity, 5,  5.1, 5.6, 5.7, 6.2, 6.3, 6.8, 6.9, 7.4, 7.5, 8.0, 8.1, 8.6, 8.7, 9.2, 9.3, 9.8, 9.9, 10.4, 10.5],
-                "f": [0,        100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100, 0,   100,  0],
-                "type" : "piecewise_constant"
-            }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
-            "Epib": { 
-                "t": [-Infinity],
-                "f": [0.38],
-                "type" : "constant"
-            },
-            "Norb": { 
-                "t": [-Infinity],
-                "f": [1.82],
-                "type" : "constant"
-            },
-            "Lacb": { 
-                "t": [-Infinity],
-                "f": [0.66],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [71.8],
-                "type" : "constant"
-            },
-            "time_ex": {
-                "t": [-Infinity],
-                "f": [20.5],
-                "type" : "constant"
-            }
-        },
-        "Observables": {
-            "Epinephrine_nmolL": {
-                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
-                "Mean": [0.38, 1.92, 4.06, 5.11,  4.35,  1.76, 0.89,  1.05],
-                "SEM":  [0.29, 1.01, 1.56, 1.44,  1.88,  0.51, 0.42,  1.15],
-                "unit": "nmol/L",
-                "plotting_info": {
-                    "fig": 5,
-                    "subplot_idx": 9,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Gaitanos 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Epinephrine (nmol/L)",
-                    "ylim": [0, 6],
-                    "xlim": [0, 22]
-                }
-           
-            },
-            "Norepinephrine_nmolL": {
-                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
-                "Mean": [1.82, 3.36, 15.91, 22.33, 17.96, 11.02, 8.53, 7.53],
-                "SEM":  [0.45, 0.95, 2.49,  6.42,  3.13,  3.74,  3.64, 3.88],
-                "unit": "nmol/L",
-                "plotting_info": {
-                    "fig": 6,
-                    "subplot_idx": 9,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Gaitanos 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
-                    "ylim": [0, 23],
-                    "xlim": [0, 22]
-                }
-            },
-            "Lactate_mmolL": {
-                "Time": [0,    5.1,  7.5,  10.1,  10.5,  13.5, 15.5,  20.5],
-                "Mean": [0.66, 1.87, 9.25, 12.60, 12.09, 12.20, 12.74, 11.66],
-                "SEM":  [0.08, 0.35, 0.54, 0.63,  0.39,  0.36,  0.38, 0.65],
-                "unit": "mmol/L",
-                "plotting_info": {
-                    "fig": 7,
-                    "subplot_idx": 9,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Gaitanos 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Lactate (mmol/L)",
-                    "ylim": [0, 13],
-                    "xlim": [0, 22]
-                }
-           
-            }
-        }
-    },
-    "Lehmann 100%":{
-        "meta": {
-            "DOI": " 10.1007/BF00423406", 
-            "kl": "-",
-            "meal": "-",
-            "age": 29.3,
-            "sex": "Female"
-            },
-        "input": {
-            "intensity": {
-                "t": [-Infinity, 0,    3,    6,    9,    12,    15],
-                "f": [0,         51.6, 71.8, 87.2, 95.7, 97.9, 100],
-                "type" : "piecewise_constant"
-            }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
-            "Epib": { 
-                "t": [-Infinity],
-                "f": [0.82],
-                "type" : "constant"
-            },
-            "Norb": { 
-                "t": [-Infinity],
-                "f": [3.52],
-                "type" : "constant"
-            },
-            "Lacb": { 
-                "t": [-Infinity],
-                "f": [1.00],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [60],
-                "type" : "constant"
-            },
-             "Vo2max": {
-                "t": [-Infinity],
-                "f": [57.9],
-                "type" : "constant"
-            },
-            "time_ex": {
-                "t": [-Infinity],
-                "f": [0],
-                "type" : "constant"
-            }
-        },
-        "Observables": {
-            "Epinephrine_nmolL": {
-                "Time": [0,    3,    6,    9,    12,   13,    15],
-                "Mean": [0.82, 1.37, 2.04, 3.16, 6.76, 10.98, 12.80],
-                "SEM":  [0.55, 0.87, 1.15, 1.53, 2.62, 6.00,  5.68],
-                "unit": "nmol/L",
-                "plotting_info": {
-                    "fig": 5,
-                    "subplot_idx": 10,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Lehmann 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Epinephrine (nmol/L)",
-                    "ylim": [0, 13],
-                    "xlim": [0, 18]
-                }
-           
-            },
-            "Norepinephrine_nmolL": {
-                "Time": [0,    3,    6,     9,     12,    13,    15],
-                "Mean": [3.52, 7.16, 12.60, 22.64, 42.02, 52.77, 57.70],
-                "SEM":  [1.00, 1.60, 3.90,  8.63,  12.35, 18.86, 21.87],
-                "unit": "nmol/L",
-                "plotting_info": {
-                    "fig": 6,
-                    "subplot_idx": 10,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Lehmann 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
-                    "ylim": [0, 60],
-                    "xlim": [0, 18]
-                }
-            },
-            "Lactate_mmolL": {
-                "Time": [0,    3,    6,    9,    12,    13,  15],
-                "Mean": [1.00, 2.54, 3.96, 6.00, 9.70,  10.80, 10.90],
-                "SEM":  [0.11, 1.29, 1.65, 1.71, 2.11,  2.04,  2.65],
-                "unit": "mmol/L",
-                "plotting_info": {
-                    "fig": 7,
-                    "subplot_idx": 10,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                        [255, 153, 102],
-                        [102, 153, 255],
-                        [102, 153, 255]
-                        ],
-                    "marker": "o",
-                    "title": "Lehmann 100%",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Lactate (mmol/L)",
-                    "ylim": [0, 15],
-                    "xlim": [0, 18]
-                }
-           
-            }
-        }
-    },
-    "Kjaer 110% untrained": {
+    "Kjaer 100% untrained": {
         "meta": {
             "doi": "10.1152/jappl.1986.61.5.1693", 
             "kl": 800,
@@ -1052,19 +762,9 @@
         "input": {
             "intensity": { 
                 "t": [-Infinity, 20, 27, 30, 32],
-                "f": [0, 60, 100, 110, 0],
+                "f": [0, 54.5, 90, 100, 0],
                 "type" : "piecewise_constant"
             }, 
-            "Gb": {    
-                "t": [-Infinity],
-                "f": [4.8653],
-                "type" : "constant"
-            },
-            "Ib": {    
-                "t": [-Infinity],
-                "f": [14.5008],
-                "type" : "constant"
-            },
             "Epib": { 
                 "t": [-Infinity],
                 "f": [0.477092802920220],
@@ -1075,14 +775,9 @@
                 "f": [2.85623877184386],
                 "type" : "constant"
             },
-             "BW": {    
-                "t": [-Infinity],
-                "f": [71],
-                "type" : "constant"
-            },
              "Vo2max": {    
                 "t": [-Infinity],
-                "f": [47],
+                "f": [51.7],
                 "type" : "constant"
             },
             "time_ex": {
@@ -1100,7 +795,7 @@
                 "plotting_info": {
                     "figName": "Epinephrine_NE",
                     "fig": 5,
-                    "subplot_idx": 11,
+                    "subplot_idx": 10,
                     "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
@@ -1108,10 +803,10 @@
                             [102, 153, 255]
                             ],                
                     "marker": "o",
-                    "title": "Kjaer 110% untrained",
+                    "title": "Kjaer 100% untrained",
                     "xlabel": "Time (minutes)",
                     "ylabel": "Epinephrine (nmol/L)",
-                    "ylim": [0, 10],
+                    "ylim": [0, 8],
                     "xlim": [0, 65]
                 }
             },
@@ -1123,7 +818,7 @@
                 "plotting_info": {
                     "figName": "Norepinephrine_NE",
                     "fig": 6,
-                    "subplot_idx": 11,
+                    "subplot_idx": 10,
                     "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
@@ -1131,75 +826,21 @@
                             [102, 153, 255]
                             ],                
                     "marker": "o",
-                    "title": "Kjaer 110% untrained",
+                    "title": "Kjaer 100% untrained",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
+                    "ylabel": "Norepi. (nmol/L)",
                     "ylim": [0, 45],
                     "xlim": [0, 65]
                 }
-            }
-        }         
-    },
-    "Kjaer 110% trained":{
-        "meta": {
-            "doi": "10.1152/jappl.1986.61.5.1693", 
-            "kl": 800,
-            "meal": 12,
-            "age": 23,
-            "sex": "male"
             },
-        "input": {
-            "intensity": {
-                "t": [-Infinity, 20, 27, 30, 32],
-                "f": [0, 60, 100, 110, 0],
-                "type" : "piecewise_constant"
-            }, 
-             "Gb": {
-                "t": [-Infinity],
-                "f": [5.1005],
-                "type" : "constant"
-            },
-            "Ib": {
-                "t": [-Infinity],
-                "f": [10.9700],
-                "type" : "constant"
-            },
-            "Epib": { 
-                "t": [-Infinity],
-                "f": [0.737959335511098],
-                "type" : "constant"
-            },
-            "Norb": { 
-                "t": [-Infinity],
-                "f": [2.34346929609668],
-                "type" : "constant"
-            },
-             "BW": {
-                "t": [-Infinity],
-                "f": [69],
-                "type" : "constant"
-            },
-             "Vo2max": {
-                "t": [-Infinity],
-                "f": [65],
-                "type" : "constant"
-            },
-            "time_ex": {
-                "t": [-Infinity],
-                "f": [20],
-                "type" : "constant"
-            }
-        },
-        "Observables": {
-            "Epinephrine_nmolL": {
-                "Time": [20, 27, 30, 32, 33, 37, 47, 62],
-                "Mean": [0.737959335511098, 0.886388207530722, 3.87714627823439, 8.69320282256658, 5.49242626800433, 1.44062496367166, 0.832889643226658, 0.883388939910025],
-                "SEM":  [0.118645447042001, 0.0949303077155559, 0.616523872077748, 1.61262947419816, 1.77863544948327, 0.331942200160425, 0.213506004347773, 0.213436253937990],
-                "unit": "nmol/L",
+            "Lactate_mmolL": {
+                "Time": [20,     27,    30,    32,    33,    37,    42,    47,    62],
+                "Mean": [0.632, 2.586, 5.883, 8.486, 10.421, 9.123, 7.622, 7.179, 3.942],
+                "SEM":  [0.16,  0.644, 0.781, 0.713, 0.759,  0.391, 0.897, 0.644, 0.271],
+                "unit": "mmol/L",
                 "plotting_info": {
-                    "figName": "Epinephrine_NE",
-                    "fig": 5,
-                    "subplot_idx": 12,
+                    "fig": 7,
+                    "subplot_idx": 9,
                     "shape": [4, 3],
                     "plot_colors": [
                             [255, 153, 102],
@@ -1207,38 +848,14 @@
                             [102, 153, 255]
                             ],                
                     "marker": "o",
-                    "title": "Kjaer 110% trained",
+                    "title": "Kjaer 100% untrained",
                     "xlabel": "Time (minutes)",
-                    "ylabel": "Epinephrine (nmol/L)",
-                    "ylim": [0, 10],
+                    "ylabel": "Lactate (mmol/L)",
+                    "ylim": [0, 15],
                     "xlim": [0, 65]
                 }
-            },
-            "Norepinephrine_nmolL": {
-                "Time": [20, 27, 30, 32, 33, 37, 47, 62],
-                "Mean": [2.34346929609668, 3.98635268659154, 12.0026947574718, 21.9089396537645, 28.5448309652131, 11.4021925526703, 5.13208394577821, 3.72580842724155],
-                "SEM":  [0.384666421688713, 0.512769475747184, 0.993589743589745, 2.21153846153846, 4.32692307692308, 1.34610280908052, 0.448820022864613, 0.512820512820515],
-                "unit": "nmol/L",
-                "plotting_info": {
-                    "figName": "Norepinephrine_NE",
-                    "fig": 6,
-                    "subplot_idx": 12,
-                    "shape": [4, 3],
-                    "plot_colors": [
-                            [255, 153, 102],
-                            [102, 153, 255],
-                            [102, 153, 255]
-                            ],                
-                    "marker": "o",
-                    "title": "Kjaer 110% trained",
-                    "xlabel": "Time (minutes)",
-                    "ylabel": "Norepinephrine (nmol/L)",
-                    "ylim": [0, 45],
-                    "xlim": [0, 65]
-                }
-            }
-
-        }
+            } 
+        }        
     }
 }
          

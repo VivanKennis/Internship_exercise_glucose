@@ -47,18 +47,47 @@ def get_parameter_bounds(parameter_names, theta, optimize_indices, strict_bounds
     # Parameter-specific bounds
     param_bounds = {}
 
-    # param_bounds["n_O2"] = (np.log(1.0e0), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
-    # param_bounds["n_lac"] = (np.log(1.0e0), np.log(4e0))  # example: tighter bounds for parameter "n_O2"
+    #param_bounds["vmax_o2"] = (np.log(1.0e-1), np.log(1e1))
+    #param_bounds["vmax_lac"] = (np.log(1.0e-2), np.log(1e3)) 
+    #param_bounds["n_lac"] = (np.log(1.0e0), np.log(1e1)) 
+    #param_bounds["km_lac"] = (np.log(5.0e-3), np.log(1e1))
+    #param_bounds["k_restore"] = (np.log(1.0e-3), np.log(1e3))  
+    #param_bounds["elim_lactate"] = (np.log(1.0e-3), np.log(1e2))
+    #param_bounds["k_O2"] = (np.log(1e-3), np.log(1e-1))    
 
-    # param_bounds["v_cons"] = (np.log(1.0e-1), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
-    # param_bounds["vmax"] = (np.log(1.0e-1), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    param_bounds["k_stress"] = (np.log(1e-3), np.log(1e-1))  
+    param_bounds["elim_stress"] = (np.log(1.0e-4), np.log(1e1))  
+    param_bounds["lac_stress"] = (np.log(1.0e-2), np.log(1e2))  
 
-    # param_bounds["km_O2"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
-    # param_bounds["km_lac"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    param_bounds["k_push"] = (np.log(1.0e-6), np.log(1e2))  
+    param_bounds["k_push2"] = (np.log(1.0e-6), np.log(1e2))  
+    param_bounds["k_rec_drive"] = (np.log(1.0e-5), np.log(1e6)) 
 
-    # param_bounds["k_restore"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
-    # param_bounds["elim_lactate"] = (np.log(1.0e-2), np.log(1e1))  # example: tighter bounds for parameter "n_lac"
+    param_bounds["Vmax_stres_n"] = (np.log(1.0e-1), np.log(1e2))  
+    param_bounds["km_stres_n"] = (np.log(1.0e-2), np.log(1e3))  
+    param_bounds["n_stres_n"] = (np.log(1.0e0), np.log(4e0)) 
 
+    param_bounds["spill"] = (np.log(1.0e-3), np.log(1e0))  
+    param_bounds["elim_NOR_neuronal"] = (np.log(1.0e-2), np.log(1e1))  
+
+    param_bounds["Vmax_stres_a"] = (np.log(1.0e-1), np.log(1e2)) 
+    param_bounds["km_stres_a"] = (np.log(1.0e-2), np.log(1e3))  
+    param_bounds["n_stres_a"] = (np.log(1.0e0), np.log(4e0))  
+    
+    param_bounds["Vmax_ex_n"] = (np.log(1.0e-1), np.log(1e2))  
+    param_bounds["km_ex_n"] = (np.log(1.0e-2), np.log(1e3))  
+    param_bounds["n_ex_n"] = (np.log(1.0e0), np.log(4e0)) 
+
+    param_bounds["Vmax_ex_a"] = (np.log(1.0e-1), np.log(1e3))  
+    param_bounds["km_ex_a"] = (np.log(1.0e-3), np.log(1e3))  
+    param_bounds["n_ex_a"] = (np.log(1.0e0), np.log(4e0))  
+    param_bounds["scale"] = (np.log(1.0e-5), np.log(1e2))  
+    param_bounds["conv"] = (np.log(1.0e-5), np.log(1e0)) 
+
+    param_bounds["release_epi"] = (np.log(1.0e-4), np.log(1e0))  
+    param_bounds["elim_nor_plasma"] = (np.log(1.0e-2), np.log(1e1))  
+    param_bounds["elim_epi_plasma"] = (np.log(1.0e-2), np.log(1e1))
+   
     # Apply parameter-specific bounds
     for param, (lower, upper) in param_bounds.items():
         if param in parameter_names and parameter_names.index(param) in optimize_indices:
