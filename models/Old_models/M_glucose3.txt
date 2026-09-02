@@ -1,0 +1,219 @@
+########## NAME
+M_glucose3
+
+########## METADATA
+time_unit = m
+description = """
+
+This model describes the glucose and insulin dynamics during excercise
+Plamsa insulin (I),
+Remote Insulin (X),
+Plasma glucose (G),
+Glucose production (Gprod),
+Glucose uptake (Gup),
+Insulin elimination due to exercise (Ie),
+Percentage of maximal oxygen consumption (PVo2max),
+Decline in glucose production by glycogenolyse (Ggly),
+Integrated excercise intensity (A)
+
+Production of insulin added
+
+"""
+########## MACROS
+########## STATES
+d/dt(PVo2max) = -0.8*PVo2max + 0.8*u3                                                           # dimentionless 
+d/dt(O2_deficit) =  max(vmax_o2 * max(PVo2max-threshold,0),0) - k_O2 * O2_deficit               # - consuption + restore
+d/dt(lactate) = vmax_lac * f_hill(max(O2_deficit,0), km_lac, n_lac) - elim_lactate*(lactate-Lacb)
+
+d/dt(met_stress) = f_2(max(PVo2max-threshold,0), k_stress) + lac_stress * max(lactate-Lacb,0) - elim_stress*met_stress
+d/dt(exercise_drive) = (k_push *  max(time - time_ex, 0) + k_push2) * PVo2max* max(sign(u3),0) - k_rec_drive * exercise_drive
+
+# Neuron
+d/dt(NOR_neuronal) = Vmax_stres_n * max(met_stress,0) + Vmax_ex_n * f_mm(max(exercise_drive,0), km_ex_n) - spill * NOR_neuronal - elim_NOR_neuronal * NOR_neuronal  # Norepinephrine (nmol/L/min)                          
+
+# Adrenal glands
+d/dt(NOR_adrenal) = Vmax_stres_a_eff * f_mm(max(met_stress,0), km_stres_a) + Vmax_ex_a_eff * f_hill(max(exercise_drive,0), km_ex_a, n_ex_a) - release_nor_adrenal * NOR_adrenal - conv_nor_to_epi * NOR_adrenal  # Norepinephrine (nmol/L/min)
+d/dt(Epi_adrenal) = conv_nor_to_epi * NOR_adrenal - release_epi * Epi_adrenal                                                                                                                           # Epinephrine (nmol/L/min)
+                                                                                                   
+# Plasma
+d/dt(NOR)    = spill * NOR_neuronal + release_nor_adrenal * NOR_adrenal- elim_nor_plasma*(NOR-Norb)                     # Norepinephrine (nmol/L/min)
+d/dt(EPI)    = release_epi * Epi_adrenal - elim_epi_plasma * (EPI-Epib)   #+ v_epi_glu * f_hill(max(G_thres-G,0), km_epi_glu, n_epi_glu)                                               # Epinephrine (nmol/L/min)
+
+# Glucose model
+d/dt(I)     = k_I_stim*max(G-Gb,0) - elim_insu * (I- Ib) - Ie                            #- k_I_epi * max((EPI-Epib),0) - k_I_nor *max((NOR-Norb),0)         # Plasma insulin (mU/L/min)
+d/dt(X)     = ins_action *(I - Ib) - elim_X * X - k_XG_epi * max((EPI-Epib),0) * X                                                      # Action of insulin (/min)
+d/dt(G)     = (BW/VolG)*(Gprod - Ggly) - (BW/VolG) * Gup - X*G - elim_glu *(G - Gb)                                                     # Plasma Glucose (mmol/L/min) 
+d/dt(Gprod) = k_Gpro_stim * PVo2max - k_Gpro_decay * Gprod  + k_Gprod_epi * max((EPI-Epib),0) + k_Gprod_nor *max((NOR-Norb),0)          # Hepatic glucose production induced by exercise (mmol/min)
+d/dt(Gup)   = K_Gup_stim  * PVo2max - k_Gup_decay * Gup                                                                                 # Glucose uptake induced by excercise (mmol/min)
+d/dt(Ie)    = K_Ie_stim * PVo2max  - k_Ie_decay * Ie                                                                                    # Rate of insulin removal (mU/L/min)
+d/dt(Ggly) = gly_A*k*A_u3 - Ggly/T1*B_u3                                                                                                # Glycolyse dynamics (mmol/kg/min)
+d/dt(A)    = A_u3*PVo2max - (A/0.001)*B_u3                                                                                              # Integrated exercise intensity 
+
+# Initial values
+PVo2max(0) = 0.0                # dimensionless
+O2_deficit(0) = 0.0             # %
+lactate(0) = 1.0                # mmol/L
+
+met_stress(0)  = 0              # dimensionless
+exercise_drive(0) = 0.0         # dimensionless
+
+NOR_neuronal(0)= 0.0            # dimensionless
+NOR_adrenal(0) = 0.0            # dimensionless
+Epi_adrenal(0) = 0.0            # dimensionless
+NOR(0) = 1.3                    # nmol/L
+EPI(0) = 0.3                    # nmol/L
+
+I(0)     = 12.0                 # mU/L
+X(0)     = 0.0                  # mU/L
+G(0)     = 4.9750               # mmol
+Gprod(0) = 0.0                  # mmol/kg
+Gup(0)   = 0.0                  # mmol/kg
+Ie(0)    = 0.0                  # (mU/L/min)
+Ggly(0) = 0.0                   # mmol
+A(0)    = 0.0
+
+########## PARAMETERS
+# Aerobic threshold
+vmax_thresh = 100.0
+km_thresh = 0.68
+
+# O2_deficit
+vmax_o2 = 0.94931108961551
+k_O2 = 13.980781172760825
+
+# Lactate
+vmax_lac = 399.0018997915273
+km_lac = 6.62732270079653
+n_lac = 6.433343189248456
+elim_lactate = 0.036958560209759
+
+# met_stress
+k_stress = 0.004387879149666
+elim_stress = 9.989663354499742
+lac_stress = 0.025869444770412
+
+# exercise_drive
+k_push = 0.00095170670819
+k_push2 = 0.19180708426934
+k_rec_drive = 0.570149831504022
+
+# NOR_neuronal
+Vmax_stres_n = 15.088214310775609
+km_stres_n = 224.33188192026978
+Vmax_ex_n = 5.074512306315921
+km_ex_n = 0.010425416911303
+spill = 0.468094380964438
+elim_NOR_neuronal = 2.393627007141584
+
+# NOR_adrenal
+Vmax_stres_a = 11.48471338138073
+km_stres_a = 0.268851356744835
+Vmax_ex_a = 163.9183586402966
+km_ex_a = 68.44518510913419
+n_ex_a = 3.999998458440444
+scale = 0.114655263975009
+conv = 0.999999999474022
+
+# Epi_adrenal
+release_epi = 0.444241773803292
+
+# NOR plasma
+elim_nor_plasma = 0.456405829227235
+
+# Epi
+elim_epi_plasma = 9.999994028193964
+
+# Insulin
+k_I_stim = 0.1
+elim_insu   = 0.142             # clearance rate plasma insuline (min^-1)
+#k_I_epi = 0.1
+#k_I_nor = 0.1
+
+# Remote insulin
+elim_X  = 0.05                  # disappearance rate remote insulin from remote insulin compartment (min^-1)
+ins_action  = 0.000028          # appearance rate insulin in remote insulin compartment (L/mU*min^1)
+k_XG_epi = 0.1
+
+# Plasma glucose
+elim_glu  = 0.035               # glucose removal rate from plasma space (independent of insulin) (min^-1) --> liver and periphery
+
+# Glucose production
+k_Gpro_stim  = 0.000008769982238011767  # (mmol*kg*min^2)   # Glucose production stimulated by exercise
+k_Gpro_decay  = 0.056                   # (min^-1)
+k_Gprod_epi = 0.2
+k_Gprod_nor = 0.1
+
+# Glucose uptake
+K_Gup_stim  = 0.000010823712255772646   # (mmol*kg*min^2)
+k_Gup_decay  = 0.0485                   # (min^-1)
+
+# Insulin removal
+K_Ie_stim  = 0.00125                    # (mU*L^-1*min)
+k_Ie_decay  = 0.075                     # (min^-1)
+
+# Glycolyse 
+k   = 0.0000599467 #0.0108              #  rate of glycolyses decline (mmol*kg^-1*min^2)
+T1  = 6.0                               #  time required o return to basel glycolyses value (min)
+
+########## VARIABLES
+release_nor_adrenal = conv*0.2
+conv_nor_to_epi = conv*0.8
+
+Vmax_stres_a_eff = Vmax_stres_a * (1+ scale * max(Vo2max-40,0))
+Vmax_ex_a_eff = Vmax_ex_a * (1+ scale * max(Vo2max-40,0))
+
+threshold = vmax_thresh * f_mm(Vo2max/90, km_thresh)    # Aerobic threshold
+
+ATH = (-1.1521*PVo2max^2)+(87.471*PVo2max)    # critical threshold value at which glycolyses start to decrease during excercise (%-min) 
+gly_A = (sign(A-ATH+1)+1)/2
+A_u3 = 1.0*sign(PVo2max)
+B_u3 = (sign(1-PVo2max)+1)/2
+VolG = 11.7                                   # glucose distribution space (L)
+
+########## FUNCTIONS
+f_hill(x, km, n) = x^n / (km^n + x^n)
+f_mm(x, km) = x / (km + x) 
+f_2(x, a) = a * (x^2) 
+
+########## EVENTS
+event_basal = gt(time, -INFINITY), O2_deficit, 0, met_stress, 0, lactate, Lacb, NOR, Norb, EPI, Epib, I, Ib, G, Gb  
+
+########## OUTPUTS
+########## INPUTS
+u3 = intensity  @ 0          # exercise intensity (%)
+Ib = Ib         @ 12.0       # basal insulin level (mU/L)
+Gb = Gb         @ 4.9750     # basal plasma glucose (mmol/L)
+BW = BW         @ 84         # body weight (kg)
+
+Epib = Epib         @ 0.3     # basal epinephrine (nmol/)
+Norb = Norb         @ 1.3     # basal norepinephrine (nmol/L)
+Lacb = Lacb         @ 1.0     # basal Lactate (mmol/L)
+time_ex = time_ex @ 0
+Vo2max = Vo2max  @ 40        # percentage of maximal oxygen consumption
+
+########## FEATURES
+Glucose_mmolL = G
+Insulin_mUL = I
+Epinephrine_nmolL = EPI
+Norepinephrine_nmolL = NOR
+Lactate_mmolL = lactate
+
+PVo2max = PVo2max
+O2_deficit = O2_deficit
+lactate = lactate
+met_stress = met_stress
+exercise_drive = exercise_drive
+NOR_neuronal = NOR_neuronal
+NOR_adrenal = NOR_adrenal
+Epi_adrenal = Epi_adrenal
+EPI = EPI
+NOR = NOR
+#threshold = threshold
+X = X
+I = I
+G = G
+Gprod = Gprod
+Gup = Gup
+Ie = Ie
+Ggly = Ggly
+A = A

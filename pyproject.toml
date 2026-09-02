@@ -1,4 +1,19 @@
-[tool.uv.workspace]
-members = [
-    "implementation_intermediate",
+[project]
+name = "systems-biology-project-template-advanced"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "emcee",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "pypesto>=0.5.6",
+    "python-dateutil",
+    "dfo-ls",
+    "scipy",
+    "sund>=2.4.1",
+    "tqdm>=4.67.3",
+    "jupyter>=1.1.1",
 ]

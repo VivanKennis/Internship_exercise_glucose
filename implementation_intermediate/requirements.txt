@@ -1,6 +1,0 @@
-matplotlib
-numpy
-pandas
-python-dateutil
-scipy
-sund
